@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>性格探索 | 你的獨特性格地圖</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', 'PingFang SC', sans-serif; }
+        body { background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); min-height: 100vh; padding: 20px; }
+        .container { max-width: 600px; margin: 0 auto; }
+        .results-card { background: white; border-radius: 24px; padding: 25px; margin-bottom: 25px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); }
+        .personality-type { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 8px 20px; border-radius: 50px; font-weight: bold; font-size: 24px; display: inline-block; }
+        .dimension { margin-bottom: 20px; }
+        .dimension-header { display: flex; justify-content: space-between; margin-bottom: 8px; font-weight: 600; color: #4a4a9e; }
+        .bar-container { height: 24px; background: #f0f2f5; border-radius: 12px; position: relative; overflow: hidden; display: flex; }
+        .bar-left { background: linear-gradient(90deg, #36d1dc 0%, #5b86e5 100%); height: 100%; transition: width 1s ease; }
+        .bar-right { background: linear-gradient(90deg, #ff9a9e 0%, #fad0c4 100%); height: 100%; flex-grow: 1; transition: width 1s ease; }
+        .insight-card { background: #f8f9ff; border-radius: 16px; padding: 18px; margin-top: 15px; border-left: 5px solid #667eea; text-align: left; }
+        .cta-button { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; padding: 16px; border-radius: 16px; font-size: 18px; font-weight: 600; width: 100%; cursor: pointer; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div style="text-align:center; margin-bottom:30px;">
+            <h1 id="title-name">你的性格分析結果</h1>
+            <p id="subtitle-time">深入了解你的獨特個性 💫</p>
+        </div>
+
+        <div class="results-card">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:25px;">
+                <div class="personality-type" id="type-code">INTJ</div>
+                <div style="font-weight:bold; color:#4a4a9e" id="accuracy">準確度: --</div>
+            </div>
+
+            <div id="dimensions-list"></div>
+
+            <div class="insight-card">
+                <h3 style="color:#4a4a9e; margin-bottom:10px;"><i class="fas fa-lightbulb"></i> 專屬洞察</h3>
+                <p id="type-desc" style="color:#555; line-height:1.5;">加載中...</p>
+            </div>
+
+            <button class="cta-button" onclick="location.href='mbti.html'">🔄 重新挑戰</button>
+        </div>
+    </div>
+
+    <script>
+        const descriptions = {
+            "ESTJ": "你是效率大師，注重秩序同實際成果，係團隊嘅定海神針。",
+            "ESTP": "你是行動派，靈活變通，最叻喺壓力下解決即時問題。",
+            "ESFJ": "你是熱心腸，非常照顧同事感受，係營造和諧氣氛嘅高手。",
+            "ESFP": "你是開心果，充滿活力，能為悶死人嘅 Office 帶來歡樂。",
+            "ENTJ": "你是天生統帥，有遠見且決斷，最鍾意帶領團隊攻城掠地。",
+            "ENTP": "你是點子王，鍾意挑戰傳統，腦入面有無窮無盡嘅創新諗法。",
+            "ENFJ": "你是精神領袖，善於激勵人心，非常關注隊友嘅個人成長。",
+            "ENFP": "你是自由靈魂，熱情洋溢，總能喺工作入面搵到新樂趣。",
+            "ISTJ": "你是可靠執行者，認真、嚴謹，交俾你嘅嘢一定唔會出錯。",
+            "ISTP": "你是冷靜分析家，務實且手腳快，最鍾意研究事物點樣運作。",
+            "ISFJ": "你是守護者，默默付出，係最體貼、最值得信賴嘅後勤力量。",
+            "ISFP": "你是藝術家，感性敏銳，鍾意用自己嘅節奏去完成靚作品。",
+            "INTJ": "你是策略大師，邏輯極強，習慣喺腦入面行埋未來十步棋。",
+            "INTP": "你是思維家，熱愛理論，能夠睇穿複雜問題背後嘅本質。",
+            "INFJ": "你是提倡者，有深度同理心，追求工作背後嘅意義同理想。",
+            "INFP": "你是調停者，理想主義，非常忠於自己嘅價值觀同內心聲音。"
+        };
+
+        window.onload = function() {
+            const raw = localStorage.getItem('luna_mbti_result');
+            if (!raw) { window.location.href = 'mbti.html'; return; }
+            const data = JSON.parse(raw);
+
+            document.getElementById('type-code').innerText = data.type;
+            document.getElementById('accuracy').innerText = `誠實度: ${data.traps === 0 ? '100%' : '一般'}`;
+            document.getElementById('subtitle-time').innerText = `挑戰用時: ${data.time} 秒 | 你的獨特性格地圖`;
+            document.getElementById('type-desc').innerText = descriptions[data.type] || "你係一個神秘又特別嘅打工仔！";
+
+            const dims = [
+                { n: '能量 E/I', v: data.scores.EI, l: '外向', r: '內向' },
+                { n: '資訊 S/N', v: data.scores.SN, l: '實感', r: '直覺' },
+                { n: '決策 T/F', v: data.scores.TF, l: '思考', r: '情感' },
+                { n: '風格 P/J', v: data.scores.PJ, l: '感知', r: '判斷' }
+            ];
+
+            const list = document.getElementById('dimensions-list');
+            dims.forEach(d => {
+                list.innerHTML += `
+                    <div class="dimension">
+                        <div class="dimension-header">
+                            <span>${d.n}</span>
+                            <span>${d.v}% | ${100-d.v}%</span>
+                        </div>
+                        <div class="bar-container">
+                            <div class="bar-left" style="width: ${d.v}%"></div>
+                            <div class="bar-right"></div>
+                        </div>
+                        <div style="display:flex; justify-content:space-between; font-size:12px; margin-top:5px; color:#888;">
+                            <span>${d.l}</span><span>${d.r}</span>
+                        </div>
+                    </div>
+                `;
+            });
+        };
+    </script>
+</body>
+</html>

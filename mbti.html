@@ -3,445 +3,236 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>香港職場人格測試 - 打工仔專屬 🏢💼</title>
+    <title>性格大冒險 | Luna Engine 🌙</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background: linear-gradient(135deg, #8A2BE2 0%, #FF69B4 100%);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 15px;
+            display: flex; justify-content: center; align-items: center;
+            padding: 15px; overflow: hidden;
         }
-        
         .container {
-            background: white;
-            border-radius: 25px;
-            box-shadow: 0 25px 70px rgba(0,0,0,0.25);
-            max-width: 550px;
-            width: 100%;
-            padding: 35px 25px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 8px;
-            background: linear-gradient(90deg, #FF6B6B 0%, #4ECDC4 100%);
-        }
-        
-        .header {
+            background: white; border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 500px; width: 100%;
+            padding: 30px 20px; position: relative;
             text-align: center;
-            margin-bottom: 25px;
         }
-        
-        .header h1 {
-            font-size: 28px;
-            color: #333;
-            margin-bottom: 10px;
-            font-weight: 800;
-        }
-        
-        .header p {
-            color: #666;
-            font-size: 16px;
-            line-height: 1.5;
-        }
-        
-        .dimensions {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-bottom: 25px;
-        }
-        
-        .dimension {
-            background: #f8f9ff;
-            padding: 15px;
-            border-radius: 15px;
-            border-left: 5px solid #8A2BE2;
-        }
-        
-        .dimension-title {
-            font-size: 18px;
-            font-weight: 700;
-            color: #333;
-            margin-bottom: 5px;
-        }
-        
-        .dimension-desc {
-            font-size: 14px;
-            color: #555;
-            line-height: 1.4;
-        }
-        
         .progress-bar {
-            height: 10px;
-            background: #eee;
-            border-radius: 12px;
-            margin-bottom: 25px;
-            overflow: hidden;
+            height: 6px; background: #eee; border-radius: 10px;
+            margin-bottom: 25px; overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%; background: #8A2BE2; width: 0%;
+            transition: width 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .q-header { font-size: 14px; color: #888; margin-bottom: 10px; font-weight: bold; }
+        .question-text {
+            font-size: 24px; font-weight: 800; color: #333;
+            margin-bottom: 30px; line-height: 1.4;
+            min-height: 70px; display: flex; align-items: center; justify-content: center;
         }
         
-        .progress {
-            height: 100%;
-            background: linear-gradient(90deg, #8A2BE2 0%, #FF69B4 100%);
-            border-radius: 12px;
-            transition: width 0.5s ease;
-        }
-        
-        .question-counter {
-            text-align: center;
-            color: #777;
-            font-size: 14px;
-            margin-bottom: 10px;
-            font-weight: 600;
-        }
-        
-        .question {
-            font-size: 22px;
-            font-weight: 700;
-            color: #333;
-            margin-bottom: 25px;
-            line-height: 1.4;
-            text-align: center;
-        }
-        
-        .options {
-            display: flex;
-            flex-direction: row; /* 左右排列 */
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-        
-        .option {
-            flex: 1;
-            padding: 30px 15px;
-            border: 3px solid #f0f0f0;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
+        /* 模式 1: 左右大方塊 */
+        .options-grid { display: flex; gap: 15px; }
+        .option-card {
+            flex: 1; padding: 25px 15px; border: 3px solid #f0f0f0;
+            border-radius: 20px; cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex; flex-direction: column; align-items: center; gap: 15px;
             background: #fcfcfc;
-            text-align: center;
-            min-height: 220px;
         }
-        
-        .option:hover {
-            border-color: #8A2BE2;
-            background: #f0f2ff;
-            transform: translateY(-5px);
+        .option-card:active { transform: scale(0.95); background: #f0f2ff; border-color: #8A2BE2; }
+        .card-emoji { font-size: 64px; }
+        .card-text { font-size: 18px; font-weight: 700; color: #444; }
+
+        /* 模式 2: 滑塊 Slider */
+        .slider-container { display: none; padding: 20px 10px; }
+        .range-slider {
+            width: 100%; height: 15px; border-radius: 10px;
+            background: #eee; outline: none; -webkit-appearance: none;
+            margin: 30px 0;
         }
-        
-        .option.selected {
-            border-color: #8A2BE2;
-            background: #f0f2ff;
-            box-shadow: 0 8px 25px rgba(138, 43, 226, 0.15);
+        .range-slider::-webkit-slider-thumb {
+            -webkit-appearance: none; width: 35px; height: 35px;
+            background: #8A2BE2; border-radius: 50%; cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
-        
-        .option-emoji {
-            font-size: 64px; /* 巨大 Emoji */
-            line-height: 1;
-        }
-        
-        .option-text {
-            font-size: 18px; /* 加大文字 */
-            font-weight: 700;
-            color: #333;
-            line-height: 1.3;
-        }
-        
-        .btn {
-            width: 100%;
-            padding: 18px;
-            background: linear-gradient(135deg, #8A2BE2 0%, #FF69B4 100%);
-            color: white;
-            border: none;
-            border-radius: 18px;
-            font-size: 18px;
-            font-weight: 700;
-            cursor: pointer;
-            margin-top: 10px;
-            transition: all 0.3s ease;
-            opacity: 0.5;
-            pointer-events: none;
-        }
-        
-        .btn.active {
-            opacity: 1;
-            pointer-events: auto;
-        }
-        
-        .result {
-            display: none;
-            text-align: center;
-            animation: fadeIn 0.8s ease;
-        }
-        
-        .result-icon { font-size: 80px; margin-bottom: 20px; }
-        .result-type { font-size: 36px; font-weight: 800; color: #8A2BE2; margin-bottom: 10px; }
-        .result-title { font-size: 22px; color: #333; margin-bottom: 20px; font-weight: 600; }
-        
-        .dimension-scores {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 10px;
-            margin: 20px 0;
-        }
-        
-        .score-item {
-            background: #f8f9ff;
-            padding: 15px;
-            border-radius: 12px;
-            text-align: left;
-        }
-        
-        .score-bar-container {
-            height: 12px;
-            background: #eee;
-            border-radius: 6px;
-            overflow: hidden;
-            margin: 8px 0;
-        }
-        
-        .score-bar-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #8A2BE2 0%, #FF69B4 100%);
-            transition: width 1s ease;
-        }
-        
-        .restart-btn {
-            background: white;
-            color: #8A2BE2;
-            border: 3px solid #8A2BE2;
-            padding: 15px;
-            border-radius: 15px;
-            font-size: 16px;
-            cursor: pointer;
-            width: 100%;
-            font-weight: 600;
+        .slider-labels { display: flex; justify-content: space-between; font-weight: bold; color: #666; }
+        .confirm-btn {
+            margin-top: 20px; padding: 15px 40px; background: #8A2BE2;
+            color: white; border: none; border-radius: 50px; font-weight: bold;
+            cursor: pointer; display: inline-block;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .fade-in { animation: fadeIn 0.5s ease; }
-
-        @media (max-width: 400px) {
-            .option-emoji { font-size: 50px; }
-            .option-text { font-size: 16px; }
-            .option { min-height: 180px; }
-        }
+        /* 動畫 */
+        .fade-out { opacity: 0; transform: translateX(-20px); transition: 0.2s; }
+        .fade-in { opacity: 1; transform: translateX(0); transition: 0.2s; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- 開始頁面 -->
-        <div id="startPage" class="fade-in">
-            <div class="header">
-                <h1>🏢💼 香港職場人格測試</h1>
-                <p>四大維度 • 24條貼地題目 • 打工仔專屬</p>
-            </div>
-            
-            <div class="dimensions">
-                <div class="dimension">
-                    <div class="dimension-title">⚡ E / I</div>
-                    <div class="dimension-desc">社交充電 vs 獨處充電</div>
-                </div>
-                <div class="dimension">
-                    <div class="dimension-title">🔍 S / N</div>
-                    <div class="dimension-desc">注重事實 vs 注重遠見</div>
-                </div>
-                <div class="dimension">
-                    <div class="dimension-title">⚖️ T / F</div>
-                    <div class="dimension-desc">邏輯分析 vs 考慮感受</div>
-                </div>
-                <div class="dimension">
-                    <div class="dimension-title">📅 P / J</div>
-                    <div class="dimension-desc">靈活應變 vs 計劃行先</div>
-                </div>
-            </div>
-            
-            <button class="btn active" onclick="startQuiz()">立即開始測試 🚀</button>
-        </div>
+    <div class="container" id="app">
+        <div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
+        <div class="q-header" id="q-counter">準備開始...</div>
+        <div class="question-text" id="q-text">Luna 性格大冒險</div>
         
-        <!-- 題目頁面 -->
-        <div id="quizPage" style="display: none;">
-            <div class="progress-bar">
-                <div class="progress" id="progressBar"></div>
+        <!-- 點擊模式 -->
+        <div class="options-grid" id="grid-mode">
+            <div class="option-card" id="optA" onclick="handleSelect('A')">
+                <div class="card-emoji" id="emojiA">🚀</div>
+                <div class="card-text" id="textA">加載中</div>
             </div>
-            <div class="question-counter" id="questionCounter">第 1 題 / 共 24 題</div>
-            <div class="question" id="questionText"></div>
-            <div class="options" id="optionsContainer"></div>
-            <button class="btn" id="nextBtn" onclick="nextQuestion()">下一題 ➡️</button>
+            <div class="option-card" id="optB" onclick="handleSelect('B')">
+                <div class="card-emoji" id="emojiB">✨</div>
+                <div class="card-text" id="textB">加載中</div>
+            </div>
         </div>
-        
-        <!-- 結果頁面 -->
-        <div id="resultPage" class="result fade-in">
-            <div class="result-icon" id="resultIcon">🎉</div>
-            <div class="result-type" id="resultType"></div>
-            <div class="result-title" id="resultTitle"></div>
-            <div class="dimension-scores" id="dimensionScores"></div>
-            <div class="result-desc" id="resultDesc" style="text-align: left; padding: 15px; background: #f8f9ff; border-radius: 12px; font-size: 16px; line-height: 1.6; color: #555;"></div>
-            <button class="restart-btn" style="margin-top: 20px;" onclick="restartQuiz()">🔄 重新測試</button>
+
+        <!-- 滑塊模式 -->
+        <div class="slider-container" id="slider-mode">
+            <div class="slider-labels">
+                <span id="labelLeft">左</span>
+                <span id="labelRight">右</span>
+            </div>
+            <input type="range" min="0" max="100" value="50" class="range-slider" id="slider">
+            <button class="confirm-btn" onclick="handleSlider()">確定 🎯</button>
         </div>
     </div>
 
     <script>
-        const questions = [
-            // E/I
-            { id: 1, question: "🕒 星期五收工，同事約食飯，但你本來想返屋企：", options: [{ text: "即刻去！聚下傾偈", value: "E", emoji: "🍻" }, { text: "都係返屋企休息", value: "I", emoji: "🏠" }], dimension: "EI" },
-            { id: 2, question: "🚇 喺地鐵見到唔熟嘅同事，路程仲有幾個站：", options: [{ text: "主動打招呼傾偈", value: "E", emoji: "👋" }, { text: "睇手機避開交流", value: "I", emoji: "📱" }], dimension: "EI" },
-            { id: 3, question: "🎉 朋友生日飯局好多陌生人，你會：", options: [{ text: "主動識新朋友", value: "E", emoji: "🤝" }, { text: "黐住熟人就算", value: "I", emoji: "🧘" }], dimension: "EI" },
-            { id: 4, question: "📱 工作遇到難題，你通常會：", options: [{ text: "搵人傾下攞意見", value: "E", emoji: "🗣️" }, { text: "自己靜靜地鑽研", value: "I", emoji: "🕵️" }], dimension: "EI" },
-            { id: 5, question: "💬 心情唔好嗰陣，你會：", options: [{ text: "搵人傾訴發洩", value: "E", emoji: "📢" }, { text: "自己消化唔想煩人", value: "I", emoji: "😶" }], dimension: "EI" },
-            { id: 6, question: "🏖️ 理想嘅兩日假期係點過？", options: [{ text: "約朋友周圍去玩", value: "E", emoji: "🏃" }, { text: "係屋企做自己嘢", value: "I", emoji: "🛌" }], dimension: "EI" },
-            // S/N
-            { id: 8, question: "📊 做 Project 嗰陣，你更鍾意：", options: [{ text: "跟足步驟確保準確", value: "S", emoji: "📏" }, { text: "先諗大方向同意義", value: "N", emoji: "🔮" }], dimension: "SN" },
-            { id: 9, question: "🎯 老闆俾新任務，你第一時間諗：", options: [{ text: "具體要做乜同幾時交", value: "S", emoji: "🕒" }, { text: "任務背後有咩可能", value: "N", emoji: "💡" }], dimension: "SN" },
-            { id: 10, question: "📈 預測公司未來，你會：", options: [{ text: "睇返過去數據判斷", value: "S", emoji: "📉" }, { text: "想像趨勢同新機會", value: "N", emoji: "🚀" }], dimension: "SN" },
-            { id: 11, question: "🧩 解決問題時，你傾向：", options: [{ text: "用已知方法穩陣試", value: "S", emoji: "🛠️" }, { text: "諗新解決方案突破", value: "N", emoji: "🌀" }], dimension: "SN" },
-            { id: 12, question: "📚 學新嘢嗰陣，你鍾意：", options: [{ text: "睇 Manual 慢慢學", value: "S", emoji: "📖" }, { text: "掌握概念自己發揮", value: "N", emoji: "🎨" }], dimension: "SN" },
-            { id: 13, question: "🔍 睇報告嗰陣，你最先睇：", options: [{ text: "具體數據同表格", value: "S", emoji: "📊" }, { text: "結論同背後含義", value: "N", emoji: "🎯" }], dimension: "SN" },
-            // T/F
-            { id: 15, question: "⚖️ 同事做錯嘢影響到你，你會：", options: [{ text: "直接指出要求改正", value: "T", emoji: "🗯️" }, { text: "婉轉提醒費事尷尬", value: "F", emoji: "🤐" }], dimension: "TF" },
-            { id: 16, question: "💰 買嘢嗰陣，你最睇重：", options: [{ text: "性價比同實際功能", value: "T", emoji: "💵" }, { text: "個人喜好同感覺", value: "F", emoji: "💖" }], dimension: "TF" },
-            { id: 17, question: "🎪 公司活動揀方案，你會揀：", options: [{ text: "平啲但實際嘅方案", value: "T", emoji: "🏷️" }, { text: "大家會玩得開心啲", value: "F", emoji: "🎈" }], dimension: "TF" },
-            { id: 18, question: "📝 寫 Email 嗰陣，你最注重：", options: [{ text: "邏輯清晰內容準確", value: "T", emoji: "📍" }, { text: "語氣友善關係維護", value: "F", emoji: "☕" }], dimension: "TF" },
-            { id: 19, question: "🤝 團隊有分歧，你傾向：", options: [{ text: "用數據道理說服人", value: "T", emoji: "⚖️" }, { text: "尋求共識保持和諧", value: "F", emoji: "🌈" }], dimension: "TF" },
-            { id: 20, question: "🕰️ 做決策嗰陣，你首要考慮：", options: [{ text: "效率同最終結果", value: "T", emoji: "🏁" }, { text: "對團隊人嘅影響", value: "F", emoji: "👨‍👩‍👧‍👦" }], dimension: "TF" },
-            // P/J
-            { id: 22, question: "📅 假期去旅行，你鍾意：", options: [{ text: "去到邊玩到邊", value: "P", emoji: "🎒" }, { text: "提早 Plan 好晒行程", value: "J", emoji: "🗓️" }], dimension: "PJ" },
-            { id: 23, question: "🗓️ 每日工作，你通常：", options: [{ text: "隨心做，有咩做咩", value: "P", emoji: "🌊" }, { text: "跟 To-do List 做", value: "J", emoji: "✅" }], dimension: "PJ" },
-            { id: 24, question: "📦 做嘢一半有新 Request：", options: [{ text: "即刻轉身 Handle 新嘢", value: "P", emoji: "🤸" }, { text: "做埋手上嗰樣先算", value: "J", emoji: "🏗️" }], dimension: "PJ" },
-            { id: 25, question: "🏠 屋企收納習慣：", options: [{ text: "亂中有序揾到就得", value: "P", emoji: "🌪️" }, { text: "每件嘢有固定位置", value: "J", emoji: "📂" }], dimension: "PJ" },
-            { id: 26, question: "⏰ 約朋友食飯，你會：", options: [{ text: "去到附近再 Confirm", value: "P", emoji: "📍" }, { text: "準時或提早到場", value: "J", emoji: "🕔" }], dimension: "PJ" },
-            { id: 27, question: "🎮 玩新 Game，你會：", options: [{ text: "入去試咗先算", value: "P", emoji: "🕹️" }, { text: "睇咗攻略先開波", value: "J", emoji: "📑" }], dimension: "PJ" }
+        const coreQuestions = [
+            { id: 1, type: 'grid', dim: 'EI', q: "收工之後，你通常會點樣「充電」？", A: "約同事去 Happy Hour 🍺", AE: "🍺", B: "自己匿返屋企打機/睇書 🎮", BE: "🏠" },
+            { id: 2, type: 'grid', dim: 'SN', q: "面對一個新 Project，你會先睇：", A: "具體數據同現有資源 📊", AE: "📊", B: "未來嘅發展潛力同概念 💡", BE: "🔮" },
+            { id: 3, type: 'slider', dim: 'TF', q: "朋友做錯嘢俾老闆鬧，你嘅反應係：", left: "分析佢做錯乜 🧩", right: "安慰佢嘅感受 ❤️" },
+            { id: 4, type: 'grid', dim: 'PJ', q: "星期六日嘅行程，你通常係：", A: "一早密密麻麻，跟足計劃 🗓️", AE: "🗓️", B: "隨心所欲，到時先算 🌊", BE: "🎒" },
+            { id: 5, type: 'grid', dim: 'TRAP', q: "老實講，你係咪亂撳緊答案？", A: "我係認真嘅！🔥", AE: "🔥", B: "你吹我唔脹 🤪", BE: "🤪" },
+            { id: 6, type: 'slider', dim: 'EI', q: "喺大排筵席嘅 Party 入面：", left: "靜靜地坐一邊 🧘", right: "全場走識新朋友 🎤" },
+            { id: 7, type: 'grid', dim: 'SN', q: "你比較鍾意睇邊類書/戲？", A: "紀實、傳記、真實故事 📖", AE: "📖", B: "科幻、奇幻、想像力爆發 🛸", BE: "🚀" },
+            { id: 8, type: 'grid', dim: 'TF', q: "工作分歧時，你最怕邊樣？", A: "逻辑唔通，做錯決策 ❌", AE: "⚖️", B: "傷咗感情，大家唔開心 💔", BE: "🤝" },
+            { id: 9, type: 'slider', dim: 'PJ', q: "你嘅書枱通常係點樣嘅？", left: "亂中有序 🎨", right: "整整齊齊 ✨" }
         ];
 
-        const typeDescriptions = {
-            "ESTJ": { icon: "🏢", title: "行政總監", desc: "注重效率同秩序，鍾意按計劃行事。" },
-            "ESTP": { icon: "🎲", title: "創業家", desc: "靈活變通，善於把握即時機會。" },
-            "ESFJ": { icon: "🤝", title: "交際能手", desc: "重視人際和諧，善於照顧同事。" },
-            "ESFP": { icon: "🎉", title: "表演者", desc: "充滿活力，係團隊嘅開心果。" },
-            "ENTJ": { icon: "👑", title: "指揮官", desc: "有遠見同決斷力，天生嘅領袖。" },
-            "ENTP": { icon: "💡", title: "發明家", desc: "創意無限，鍾意挑戰傳統思維。" },
-            "ENFJ": { icon: "🌟", title: "導師", desc: "善於激勵他人，關注團隊發展。" },
-            "ENFP": { icon: "🌈", title: "倡導者", desc: "熱情洋溢，總能發現新可能性。" },
-            "ISTJ": { icon: "📋", title: "稽查員", desc: "認真負責，係最可靠嘅執行者。" },
-            "ISTP": { icon: "🔧", title: "工匠", desc: "冷靜務實，善於分析解決問題。" },
-            "ISFJ": { icon: "🛡️", title: "守護者", desc: "細心體貼，默默守護團隊利益。" },
-            "ISFP": { icon: "🎨", title: "藝術家", desc: "感性敏銳，鍾意用創意做嘢。" },
-            "INTJ": { icon: "🧠", title: "建築師", desc: "戰略大師，追求完美嘅系統。" },
-            "INTP": { icon: "🔬", title: "邏輯學家", desc: "熱愛知識，追求真理嘅分析者。" },
-            "INFJ": { icon: "🔮", title: "提倡者", desc: "有深度同理心，追求意義同理想。" },
-            "INFP": { icon: "💭", title: "調停者", desc: "理想主義，重視真實嘅自我表達。" }
+        const extraQuestions = {
+            'EI': { type: 'grid', dim: 'EI', q: "【加插題】遇到難題，你會點搵答案？", A: "搵人傾下攞意見 🗣️", AE: "🗣️", B: "自己上網搵資料 💻", BE: "🕵️" },
+            'SN': { type: 'grid', dim: 'SN', q: "【加插題】老闆講未來藍圖，你心諗：", A: "佢畫緊大餅？實際點做先？ 🤨", AE: "🤨", B: "好正喎！好有遠見！ ✨", BE: "🤩" },
+            'TF': { type: 'grid', dim: 'TF', q: "【加插題】解僱一個表現差但好老友嘅員工：", A: "為公司好，一定要炒 ⚖️", AE: "💼", B: "真係好難落手，想再俾機會 😭", BE: "🥺" },
+            'PJ': { type: 'grid', dim: 'PJ', q: "【加插題】如果要你執屋，你會：", A: "一次過執晒所有嘢 🧹", AE: "🧹", B: "執到邊算到邊 📦", BE: "🤷" }
         };
 
-        let currentQuestionIndex = 0;
-        let answers = [];
-        let startTime = 0;
+        let currentIdx = 0;
+        let scores = { E:0, I:0, S:0, N:0, T:0, F:0, P:0, J:0 };
+        let results = [];
+        let startTime = Date.now();
+        let qStartTime = Date.now();
+        let questionPool = [...coreQuestions];
 
-        function startQuiz() {
-            document.getElementById('startPage').style.display = 'none';
-            document.getElementById('quizPage').style.display = 'block';
-            startTime = Date.now();
-            showQuestion();
-        }
-
-        function showQuestion() {
-            const q = questions[currentQuestionIndex];
-            document.getElementById('progressBar').style.width = ((currentQuestionIndex + 1) / questions.length) * 100 + '%';
-            document.getElementById('questionCounter').textContent = `第 ${currentQuestionIndex + 1} 題 / 共 ${questions.length} 題`;
-            document.getElementById('questionText').textContent = q.question;
+        function updateUI() {
+            const q = questionPool[currentIdx];
+            const progress = (currentIdx / questionPool.length) * 100;
+            document.getElementById('progress').style.width = progress + '%';
+            document.getElementById('q-counter').innerText = `問題 ${currentIdx + 1} / ${questionPool.length}`;
             
-            const container = document.getElementById('optionsContainer');
-            container.innerHTML = '';
-            
-            q.options.forEach((opt, index) => {
-                const div = document.createElement('div');
-                div.className = 'option';
-                div.innerHTML = `
-                    <div class="option-emoji">${opt.emoji}</div>
-                    <div class="option-text">${opt.text}</div>
-                `;
-                div.onclick = () => selectOption(index, opt.value);
-                container.appendChild(div);
-            });
-            document.getElementById('nextBtn').classList.remove('active');
-        }
+            const textEl = document.getElementById('q-text');
+            textEl.classList.remove('fade-in');
+            void textEl.offsetWidth; // trigger reflow
+            textEl.classList.add('fade-in');
+            textEl.innerText = q.q;
 
-        function selectOption(index, value) {
-            answers[currentQuestionIndex] = value;
-            document.querySelectorAll('.option').forEach((opt, i) => {
-                opt.classList.toggle('selected', i === index);
-            });
-            document.getElementById('nextBtn').classList.add('active');
-        }
-
-        function nextQuestion() {
-            if (!answers[currentQuestionIndex]) return;
-            currentQuestionIndex++;
-            if (currentQuestionIndex >= questions.length) {
-                calculateResults();
+            if (q.type === 'grid') {
+                document.getElementById('grid-mode').style.display = 'flex';
+                document.getElementById('slider-mode').style.display = 'none';
+                document.getElementById('emojiA').innerText = q.AE;
+                document.getElementById('textA').innerText = q.A;
+                document.getElementById('emojiB').innerText = q.BE;
+                document.getElementById('textB').innerText = q.B;
             } else {
-                showQuestion();
+                document.getElementById('grid-mode').style.display = 'none';
+                document.getElementById('slider-mode').style.display = 'block';
+                document.getElementById('labelLeft').innerText = q.left;
+                document.getElementById('labelRight').innerText = q.right;
+                document.getElementById('slider').value = 50;
+            }
+            qStartTime = Date.now();
+        }
+
+        function handleSelect(choice) {
+            const q = questionPool[currentIdx];
+            const duration = Date.now() - qStartTime;
+            
+            if (q.dim !== 'TRAP') {
+                const val = (choice === 'A') ? q.dim[0] : q.dim[1];
+                scores[val] += 10; // Basic weight
+            } else if (choice === 'B') {
+                results.push({ trap: 'fail' });
+            }
+
+            results.push({ id: q.id, choice, duration });
+            next();
+        }
+
+        function handleSlider() {
+            const q = questionPool[currentIdx];
+            const val = parseInt(document.getElementById('slider').value);
+            const duration = Date.now() - qStartTime;
+            
+            // Weight based on slider position
+            if (val < 50) {
+                scores[q.dim[0]] += (50 - val) / 5;
+            } else {
+                scores[q.dim[1]] += (val - 50) / 5;
+            }
+            
+            results.push({ id: q.id, val, duration });
+            next();
+        }
+
+        function next() {
+            currentIdx++;
+            // Borderline detection logic after initial core
+            if (currentIdx === 9) {
+                const dims = ['EI', 'SN', 'TF', 'PJ'];
+                dims.forEach(d => {
+                    const s1 = scores[d[0]];
+                    const s2 = scores[d[1]];
+                    const total = s1 + s2;
+                    if (total > 0) {
+                        const ratio = s1 / total;
+                        if (ratio > 0.4 && ratio < 0.6) {
+                            questionPool.push(extraQuestions[d]);
+                        }
+                    }
+                });
+            }
+
+            if (currentIdx < questionPool.length) {
+                updateUI();
+            } else {
+                finish();
             }
         }
 
-        function calculateResults() {
-            document.getElementById('quizPage').style.display = 'none';
-            document.getElementById('resultPage').style.display = 'block';
+        function finish() {
+            const finalScores = {
+                EI: Math.round((scores.E / (scores.E + scores.I || 1)) * 100),
+                SN: Math.round((scores.S / (scores.S + scores.N || 1)) * 100),
+                TF: Math.round((scores.T / (scores.T + scores.F || 1)) * 100),
+                PJ: Math.round((scores.P / (scores.P + scores.J || 1)) * 100)
+            };
+            const type = (finalScores.EI >= 50 ? 'E':'I') + (finalScores.SN >= 50 ? 'S':'N') + (finalScores.TF >= 50 ? 'T':'F') + (finalScores.PJ >= 50 ? 'P':'J');
             
-            let counts = { E:0, I:0, S:0, N:0, T:0, F:0, P:0, J:0 };
-            answers.forEach(val => counts[val]++);
+            localStorage.setItem('luna_mbti_result', JSON.stringify({
+                type,
+                scores: finalScores,
+                time: Math.round((Date.now() - startTime) / 1000),
+                traps: results.filter(r => r.trap === 'fail').length
+            }));
             
-            const type = (counts.E >= counts.I ? 'E':'I') + (counts.S >= counts.N ? 'S':'N') + (counts.T >= counts.F ? 'T':'F') + (counts.P >= counts.J ? 'P':'J');
-            const result = typeDescriptions[type];
-            
-            document.getElementById('resultIcon').textContent = result.icon;
-            document.getElementById('resultType').textContent = type;
-            document.getElementById('resultTitle').textContent = `你係 — ${result.title}`;
-            document.getElementById('resultDesc').textContent = result.desc;
-            
-            const scores = document.getElementById('dimensionScores');
-            scores.innerHTML = '';
-            const dims = [{l:'E', r:'I', n:'能量'}, {l:'S', r:'N', n:'資訊'}, {l:'T', r:'F', n:'決策'}, {l:'P', r:'J', n:'風格'}];
-            dims.forEach(d => {
-                const p = Math.round((counts[d.l] / 6) * 100);
-                scores.innerHTML += `
-                    <div class="score-item">
-                        <div style="display:flex; justify-content:space-between; font-weight:bold;">
-                            <span>${d.l} (${p}%)</span><span>${d.r} (${100-p}%)</span>
-                        </div>
-                        <div class="score-bar-container"><div class="score-bar-fill" style="width:${p}%"></div></div>
-                    </div>`;
-            });
+            window.location.href = 'mbti_result.html';
         }
 
-        function restartQuiz() {
-            currentQuestionIndex = 0; answers = [];
-            document.getElementById('resultPage').style.display = 'none';
-            document.getElementById('startPage').style.display = 'block';
-        }
+        updateUI();
     </script>
 </body>
 </html>
