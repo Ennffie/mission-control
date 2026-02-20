@@ -18,7 +18,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            padding: 15px;
         }
         
         .container {
@@ -27,7 +27,7 @@
             box-shadow: 0 25px 70px rgba(0,0,0,0.25);
             max-width: 550px;
             width: 100%;
-            padding: 45px 35px;
+            padding: 35px 25px;
             position: relative;
             overflow: hidden;
         }
@@ -44,59 +44,54 @@
         
         .header {
             text-align: center;
-            margin-bottom: 35px;
+            margin-bottom: 25px;
         }
         
         .header h1 {
-            font-size: 32px;
+            font-size: 28px;
             color: #333;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             font-weight: 800;
         }
         
         .header p {
             color: #666;
-            font-size: 18px;
-            line-height: 1.6;
+            font-size: 16px;
+            line-height: 1.5;
         }
         
         .dimensions {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-bottom: 35px;
+            gap: 12px;
+            margin-bottom: 25px;
         }
         
         .dimension {
             background: #f8f9ff;
-            padding: 18px;
+            padding: 15px;
             border-radius: 15px;
             border-left: 5px solid #8A2BE2;
         }
         
         .dimension-title {
-            font-size: 22px;
+            font-size: 18px;
             font-weight: 700;
             color: #333;
-            margin-bottom: 8px;
+            margin-bottom: 5px;
         }
         
         .dimension-desc {
-            font-size: 16px;
+            font-size: 14px;
             color: #555;
-            line-height: 1.5;
-        }
-        
-        .dimension-emoji {
-            font-size: 28px;
-            margin-bottom: 8px;
+            line-height: 1.4;
         }
         
         .progress-bar {
             height: 10px;
             background: #eee;
             border-radius: 12px;
-            margin-bottom: 35px;
+            margin-bottom: 25px;
             overflow: hidden;
         }
         
@@ -110,101 +105,79 @@
         .question-counter {
             text-align: center;
             color: #777;
-            font-size: 16px;
-            margin-bottom: 15px;
+            font-size: 14px;
+            margin-bottom: 10px;
             font-weight: 600;
         }
         
         .question {
-            font-size: 24px;
+            font-size: 22px;
             font-weight: 700;
             color: #333;
-            margin-bottom: 30px;
-            line-height: 1.5;
+            margin-bottom: 25px;
+            line-height: 1.4;
+            text-align: center;
         }
         
         .options {
             display: flex;
-            flex-direction: column;
-            gap: 16px;
+            flex-direction: row; /* 左右排列 */
+            gap: 15px;
+            margin-bottom: 20px;
         }
         
         .option {
-            padding: 22px 25px;
-            border: 3px solid #e0e0e0;
-            border-radius: 18px;
+            flex: 1;
+            padding: 30px 15px;
+            border: 3px solid #f0f0f0;
+            border-radius: 20px;
             cursor: pointer;
             transition: all 0.3s ease;
             display: flex;
+            flex-direction: column;
             align-items: center;
+            justify-content: center;
             gap: 15px;
-            background: white;
+            background: #fcfcfc;
+            text-align: center;
+            min-height: 220px;
         }
         
         .option:hover {
             border-color: #8A2BE2;
             background: #f0f2ff;
-            transform: translateX(8px);
+            transform: translateY(-5px);
         }
         
         .option.selected {
             border-color: #8A2BE2;
             background: #f0f2ff;
-            box-shadow: 0 5px 20px rgba(138, 43, 226, 0.2);
+            box-shadow: 0 8px 25px rgba(138, 43, 226, 0.15);
         }
         
-        .option-radio {
-            width: 26px;
-            height: 26px;
-            border: 3px solid #ccc;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-            flex-shrink: 0;
-        }
-        
-        .option.selected .option-radio {
-            border-color: #8A2BE2;
-            background: #8A2BE2;
-        }
-        
-        .option.selected .option-radio::after {
-            content: '✓';
-            color: white;
-            font-size: 16px;
-            font-weight: bold;
+        .option-emoji {
+            font-size: 64px; /* 巨大 Emoji */
+            line-height: 1;
         }
         
         .option-text {
-            font-size: 20px;
-            color: #444;
-            line-height: 1.5;
-        }
-        
-        .trap-hint {
-            font-size: 16px;
-            color: #FF6B6B;
-            font-style: italic;
-            margin-top: 12px;
-            padding: 12px;
-            background: #fff5f5;
-            border-radius: 10px;
-            border-left: 4px solid #FF6B6B;
+            font-size: 18px; /* 加大文字 */
+            font-weight: 700;
+            color: #333;
+            line-height: 1.3;
         }
         
         .btn {
             width: 100%;
-            padding: 20px;
+            padding: 18px;
             background: linear-gradient(135deg, #8A2BE2 0%, #FF69B4 100%);
             color: white;
             border: none;
             border-radius: 18px;
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 700;
             cursor: pointer;
-            margin-top: 35px;
+            margin-top: 10px;
             transition: all 0.3s ease;
             opacity: 0.5;
             pointer-events: none;
@@ -215,184 +188,67 @@
             pointer-events: auto;
         }
         
-        .btn.active:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(138, 43, 226, 0.3);
-        }
-        
-        /* 結果頁面 */
         .result {
             display: none;
             text-align: center;
             animation: fadeIn 0.8s ease;
         }
         
-        .result-icon {
-            font-size: 90px;
-            margin-bottom: 25px;
-        }
-        
-        .result-type {
-            font-size: 42px;
-            font-weight: 800;
-            color: #8A2BE2;
-            margin-bottom: 15px;
-        }
-        
-        .result-title {
-            font-size: 26px;
-            color: #333;
-            margin-bottom: 25px;
-            font-weight: 600;
-        }
+        .result-icon { font-size: 80px; margin-bottom: 20px; }
+        .result-type { font-size: 36px; font-weight: 800; color: #8A2BE2; margin-bottom: 10px; }
+        .result-title { font-size: 22px; color: #333; margin-bottom: 20px; font-weight: 600; }
         
         .dimension-scores {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin: 30px 0;
+            grid-template-columns: 1fr;
+            gap: 10px;
+            margin: 20px 0;
         }
         
         .score-item {
             background: #f8f9ff;
-            padding: 20px;
-            border-radius: 15px;
-            text-align: center;
-        }
-        
-        .score-letter {
-            font-size: 28px;
-            font-weight: 800;
-            color: #8A2BE2;
-            margin-bottom: 5px;
-        }
-        
-        .score-name {
-            font-size: 16px;
-            color: #666;
-            margin-bottom: 10px;
+            padding: 15px;
+            border-radius: 12px;
+            text-align: left;
         }
         
         .score-bar-container {
-            height: 20px;
+            height: 12px;
             background: #eee;
-            border-radius: 10px;
+            border-radius: 6px;
             overflow: hidden;
-            margin-bottom: 8px;
+            margin: 8px 0;
         }
         
         .score-bar-fill {
             height: 100%;
             background: linear-gradient(90deg, #8A2BE2 0%, #FF69B4 100%);
-            border-radius: 10px;
             transition: width 1s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 12px;
-            font-weight: bold;
-        }
-        
-        .score-percent {
-            font-size: 18px;
-            font-weight: 700;
-            color: #333;
-        }
-        
-        .reliability {
-            display: flex;
-            justify-content: center;
-            gap: 5px;
-            margin: 25px 0;
-        }
-        
-        .star {
-            font-size: 32px;
-            color: #FFD700;
-        }
-        
-        .reliability-text {
-            font-size: 16px;
-            color: #666;
-            margin-top: 10px;
-            margin-bottom: 25px;
-        }
-        
-        .result-desc {
-            font-size: 18px;
-            color: #555;
-            line-height: 1.8;
-            margin-bottom: 30px;
-            text-align: left;
-            padding: 25px;
-            background: #f8f9ff;
-            border-radius: 15px;
         }
         
         .restart-btn {
             background: white;
             color: #8A2BE2;
             border: 3px solid #8A2BE2;
-            padding: 18px 35px;
+            padding: 15px;
             border-radius: 15px;
-            font-size: 18px;
+            font-size: 16px;
             cursor: pointer;
-            transition: all 0.3s ease;
             width: 100%;
-            margin-top: 15px;
             font-weight: 600;
         }
-        
-        .restart-btn:hover {
-            background: #8A2BE2;
-            color: white;
-        }
-        
-        /* 動畫 */
+
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(30px); }
+            from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
         
-        .fade-in {
-            animation: fadeIn 0.5s ease;
-        }
-        
-        /* 響應式 */
-        @media (max-width: 600px) {
-            .container {
-                padding: 30px 20px;
-                border-radius: 20px;
-            }
-            
-            .header h1 {
-                font-size: 26px;
-            }
-            
-            .dimension-title {
-                font-size: 19px;
-            }
-            
-            .dimension-desc {
-                font-size: 15px;
-            }
-            
-            .question {
-                font-size: 22px;
-            }
-            
-            .option-text {
-                font-size: 18px;
-            }
-            
-            .dimensions {
-                grid-template-columns: 1fr;
-            }
-            
-            .dimension-scores {
-                grid-template-columns: 1fr;
-            }
+        .fade-in { animation: fadeIn 0.5s ease; }
+
+        @media (max-width: 400px) {
+            .option-emoji { font-size: 50px; }
+            .option-text { font-size: 16px; }
+            .option { min-height: 180px; }
         }
     </style>
 </head>
@@ -402,54 +258,26 @@
         <div id="startPage" class="fade-in">
             <div class="header">
                 <h1>🏢💼 香港職場人格測試</h1>
-                <p>四大維度 • 24條貼地題目 • 約5分鐘完成<br>幫你了解自己嘅職場性格同工作模式！</p>
+                <p>四大維度 • 24條貼地題目 • 打工仔專屬</p>
             </div>
             
             <div class="dimensions">
                 <div class="dimension">
-                    <div class="dimension-emoji">⚡</div>
-                    <div class="dimension-title">E / I - 能量來源</div>
-                    <div class="dimension-desc">
-                        E = <strong>External charging</strong><br>從人群中獲得能量 💬<br>
-                        I = <strong>Internal energy</strong><br>獨處時充電 🧘
-                    </div>
+                    <div class="dimension-title">⚡ E / I</div>
+                    <div class="dimension-desc">社交充電 vs 獨處充電</div>
                 </div>
                 <div class="dimension">
-                    <div class="dimension-emoji">🔍</div>
-                    <div class="dimension-title">S / N - 資訊處理</div>
-                    <div class="dimension-desc">
-                        S = <strong>See facts first</strong><br>眼見為實，注重具體數據 📊<br>
-                        N = <strong>Need vision</strong><br>要有遠見，關注未來可能 🔮
-                    </div>
+                    <div class="dimension-title">🔍 S / N</div>
+                    <div class="dimension-desc">注重事實 vs 注重遠見</div>
                 </div>
                 <div class="dimension">
-                    <div class="dimension-emoji">⚖️</div>
-                    <div class="dimension-title">T / F - 決策方式</div>
-                    <div class="dimension-desc">
-                        T = <strong>Thinking first</strong><br>思考行先，邏輯分析 🧠<br>
-                        F = <strong>Feeling first</strong><br>感覺行先，考慮人際和諧 ❤️
-                    </div>
+                    <div class="dimension-title">⚖️ T / F</div>
+                    <div class="dimension-desc">邏輯分析 vs 考慮感受</div>
                 </div>
                 <div class="dimension">
-                    <div class="dimension-emoji">📅</div>
-                    <div class="dimension-title">P / J - 工作風格</div>
-                    <div class="dimension-desc">
-                        P = <strong>Play by ear</strong><br>見步行步，靈活應變 🎯<br>
-                        J = <strong>Just plan it</strong><br>計劃好先，喜歡計劃 📋
-                    </div>
+                    <div class="dimension-title">📅 P / J</div>
+                    <div class="dimension-desc">靈活應變 vs 計劃行先</div>
                 </div>
-            </div>
-            
-            <div style="background: #f0f2ff; padding: 22px; border-radius: 18px; margin: 25px 0; border-left: 6px solid #8A2BE2;">
-                <p style="color: #555; font-size: 17px; line-height: 1.6; margin: 0;">
-                    <strong>🎯 測試特點：</strong><br>
-                    • 24條貼地香港職場題目<br>
-                    • 每組包含陷阱題驗證<br>
-                    • 動態邏輯（模糊時自動加題）<br>
-                    • 速度計算與可靠度評分<br>
-                    • 手機友好，字體超大 👓<br>
-                    • 完全免費，無需註冊 💯
-                </p>
             </div>
             
             <button class="btn active" onclick="startQuiz()">立即開始測試 🚀</button>
@@ -463,7 +291,6 @@
             <div class="question-counter" id="questionCounter">第 1 題 / 共 24 題</div>
             <div class="question" id="questionText"></div>
             <div class="options" id="optionsContainer"></div>
-            <div class="trap-hint" id="trapHint" style="display: none;"></div>
             <button class="btn" id="nextBtn" onclick="nextQuestion()">下一題 ➡️</button>
         </div>
         
@@ -472,783 +299,148 @@
             <div class="result-icon" id="resultIcon">🎉</div>
             <div class="result-type" id="resultType"></div>
             <div class="result-title" id="resultTitle"></div>
-            
             <div class="dimension-scores" id="dimensionScores"></div>
-            
-            <div class="stats-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 25px 0;">
-                <div class="stat-box" style="background: #f8f9ff; padding: 16px; border-radius: 12px; text-align: center;">
-                    <div style="font-size: 14px; color: #666; margin-bottom: 6px;">🎯 測試準確度</div>
-                    <div id="trapScore" style="font-size: 16px; font-weight: 700; color: #8A2BE4;"></div>
-                </div>
-                <div class="stat-box" style="background: #f8f9ff; padding: 16px; border-radius: 12px; text-align: center;">
-                    <div style="font-size: 14px; color: #666; margin-bottom: 6px;">⏱️ 完成時間</div>
-                    <div id="timeStats" style="font-size: 16px; font-weight: 700; color: #8A2BE4;"></div>
-                </div>
-            </div>
-            
-            <div class="reliability" id="reliabilityStars"></div>
-            <div class="reliability-text" id="reliabilityText"></div>
-            
-            <div class="result-desc" id="resultDesc"></div>
-            
-            <div style="background: #f0f2ff; padding: 20px; border-radius: 15px; margin: 25px 0; border-left: 6px solid #8A2BE2;">
-                <div style="font-size: 15px; color: #555; font-weight: 700; margin-bottom: 10px;">📊 分數解讀：</div>
-                <ul style="font-size: 14px; color: #666; line-height: 1.7; margin: 0; padding-left: 20px;">
-                    <li><strong>60-100%</strong>：明顯傾向該側</li>
-                    <li><strong>40-60%</strong>：平衡型（需要加題判斷）</li>
-                    <li><strong>0-40%</strong>：傾向對立側</li>
-                    <li><strong>每組 6題</strong>，如模糊會自動加題至最多 8題</li>
-                </ul>
-            </div>
-            
-            <button class="restart-btn" onclick="restartQuiz()">🔄 重新測試</button>
+            <div class="result-desc" id="resultDesc" style="text-align: left; padding: 15px; background: #f8f9ff; border-radius: 12px; font-size: 16px; line-height: 1.6; color: #555;"></div>
+            <button class="restart-btn" style="margin-top: 20px;" onclick="restartQuiz()">🔄 重新測試</button>
         </div>
     </div>
 
     <script>
-        // 四大維度題庫 (每維度 6題 + 1陷阱題)
         const questions = [
-            // ========== E/I 維度 (7題) ==========
-            {
-                id: 1,
-                question: "🕒 星期五收工前，同事突然約食飯，但你計劃咗返屋企睇書休息：",
-                options: [
-                    { text: "立即應承，同同事聚聚傾下計！", value: "E" },
-                    { text: "婉拒，堅持返屋企自己休息", value: "I" }
-                ],
-                dimension: "EI",
-                isTrap: false,
-                category: "work-social"
-            },
-            {
-                id: 2,
-                question: "🚇 搭地鐵遇見唔係好熟嘅同事，路程有5個站：",
-                options: [
-                    { text: "主動打招呼，嘗試搵話題傾偈", value: "E" },
-                    { text: "輕輕點頭微笑，然後睇手機避開交流", value: "I" }
-                ],
-                dimension: "EI",
-                isTrap: false,
-                category: "commute"
-            },
-            {
-                id: 3,
-                question: "🎉 朋友生日飯局有15人參加，你唔識其他朋友：",
-                options: [
-                    { text: "當係識新朋友機會，主動自我介紹", value: "E" },
-                    { text: "黐實認識嘅朋友，唔想同陌生人傾偈", value: "I" }
-                ],
-                dimension: "EI",
-                isTrap: false,
-                category: "group-social"
-            },
-            {
-                id: 4,
-                question: "📱 工作上遇到難題，你會點處理？",
-                options: [
-                    { text: "搵同事/上司傾下，聽下意見", value: "E" },
-                    { text: "自己靜靜地研究，解決先講", value: "I" }
-                ],
-                dimension: "EI",
-                isTrap: false,
-                category: "work-problem"
-            },
-            {
-                id: 5,
-                question: "💬 心情唔好嗰陣，你通常會：",
-                options: [
-                    { text: "搵朋友傾訴，講出嚟舒服啲", value: "E" },
-                    { text: "自己消化，唔想打擾人", value: "I" }
-                ],
-                dimension: "EI",
-                isTrap: false,
-                category: "emotional"
-            },
-            {
-                id: 6,
-                question: "🏖️ 有兩日假期，你最理想點安排？",
-                options: [
-                    { text: "約朋友去玩，戶外活動最正！", value: "E" },
-                    { text: "享受 me time，做自己鍾意嘅嘢", value: "I" }
-                ],
-                dimension: "EI",
-                isTrap: false,
-                category: "weekend"
-            },
-            {
-                id: 7,
-                question: "🧐 你有冇認真睇緊呢個測試？",
-                options: [
-                    { text: "有！我好認真㗎！", value: "correct" },
-                    { text: "冇，亂撳之嘛", value: "wrong" }
-                ],
-                dimension: "EI",
-                isTrap: true,
-                hint: "🎭 誠實度測試題"
-            },
-            
-            // ========== S/N 維度 (7題) ==========
-            {
-                id: 8,
-                question: "📊 做 project 時，你更傾向：",
-                options: [
-                    { text: "跟步驟完成，確保每個細節都正確", value: "S" },
-                    { text: "先思考整體方向，再填返細節", value: "N" }
-                ],
-                dimension: "SN",
-                isTrap: false,
-                category: "project"
-            },
-            {
-                id: 9,
-                question: "🎯 老闆俾你新任務時，你第一時間會：",
-                options: [
-                    { text: "問清楚具體要求同 deadline", value: "S" },
-                    { text: "思考任務背後嘅意義同可能性", value: "N" }
-                ],
-                dimension: "SN",
-                isTrap: false,
-                category: "task"
-            },
-            {
-                id: 10,
-                question: "📈 公司明年嘅發展方向，你會點睇？",
-                options: [
-                    { text: "睇返過去數據同表現嚟判斷", value: "S" },
-                    { text: "想像未來各種可能性同趨勢", value: "N" }
-                ],
-                dimension: "SN",
-                isTrap: false,
-                category: "future"
-            },
-            {
-                id: 11,
-                question: "🧩 解決問題時，你通常：",
-                options: [
-                    { text: "用已知嘅方法，一步步試", value: "S" },
-                    { text: "諗新嘅解決方案，跳出框框", value: "N" }
-                ],
-                dimension: "SN",
-                isTrap: false,
-                category: "problem-solving"
-            },
-            {
-                id: 12,
-                question: "📚 學習新技能時，你偏好：",
-                options: [
-                    { text: "睇說明書，一步步跟住做", value: "S" },
-                    { text: "掌握大概念，然後自己發揮", value: "N" }
-                ],
-                dimension: "SN",
-                isTrap: false,
-                category: "learning"
-            },
-            {
-                id: 13,
-                question: "🔍 同事俾你一份報告，你會首先：",
-                options: [
-                    { text: "睇具體數據同表格", value: "S" },
-                    { text: "睇結論同背後含義", value: "N" }
-                ],
-                dimension: "SN",
-                isTrap: false,
-                category: "report"
-            },
-            {
-                id: 14,
-                question: "🤔 你覺得呢個測試係咪有實際用處？",
-                options: [
-                    { text: "係！設計得好有心機", value: "correct" },
-                    { text: "唔係，亂咁設計嘅啫", value: "wrong" }
-                ],
-                dimension: "SN",
-                isTrap: true,
-                hint: "🎭 認真度測試題"
-            },
-            
-            // ========== T/F 維度 (7題) ==========
-            {
-                id: 15,
-                question: "⚖️ 同事做錯嘢影響你嘅工作，你會：",
-                options: [
-                    { text: "直接指出錯誤，要求佢改正", value: "T" },
-                    { text: "婉轉提醒，顧及對方面子", value: "F" }
-                ],
-                dimension: "TF",
-                isTrap: false,
-                category: "conflict"
-            },
-            {
-                id: 16,
-                question: "💰 買嘢時，你主要考慮：",
-                options: [
-                    { text: "性價比、功能、實際需要", value: "T" },
-                    { text: "感覺、外觀、用家評價", value: "F" }
-                ],
-                dimension: "TF",
-                isTrap: false,
-                category: "decision"
-            },
-            {
-                id: 17,
-                question: "🎪 公司搞活動，有兩個方案：",
-                options: [
-                    { text: "A方案：平啲，但氣氛普通", value: "T" },
-                    { text: "B方案：貴啲，但大家會開心啲", value: "F" }
-                ],
-                dimension: "TF",
-                isTrap: false,
-                category: "event"
-            },
-            {
-                id: 18,
-                question: "📝 寫電郵時，你更注重：",
-                options: [
-                    { text: "內容準確、邏輯清晰", value: "T" },
-                    { text: "語氣友善、關係維護", value: "F" }
-                ],
-                dimension: "TF",
-                isTrap: false,
-                category: "communication"
-            },
-            {
-                id: 19,
-                question: "🤝 團隊有不同意見時，你傾向：",
-                options: [
-                    { text: "用數據同邏輯說服對方", value: "T" },
-                    { text: "尋求共識，保持和諧", value: "F" }
-                ],
-                dimension: "TF",
-                isTrap: false,
-                category: "team"
-            },
-            {
-                id: 20,
-                question: "🕰️ 做決定時，你首要考慮：",
-                options: [
-                    { text: "效率同結果", value: "T" },
-                    { text: "對團隊嘅影響", value: "F" }
-                ],
-                dimension: "TF",
-                isTrap: false,
-                category: "decision-making"
-            },
-            {
-                id: 21,
-                question: "😊 你有冇覺得呢個測試幾有趣？",
-                options: [
-                    { text: "有！設計得幾好", value: "correct" },
-                    { text: "冇，好無聊", value: "wrong" }
-                ],
-                dimension: "TF",
-                isTrap: true,
-                hint: "🎭 態度測試題"
-            },
-            
-            // ========== P/J 維度 (7題) ==========
-            {
-                id: 22,
-                question: "📅 假期安排，你傾向：",
-                options: [
-                    { text: "臨時決定，睇心情", value: "P" },
-                    { text: "提早計劃，跟日程", value: "J" }
-                ],
-                dimension: "PJ",
-                isTrap: false,
-                category: "holiday"
-            },
-            {
-                id: 23,
-                question: "🗓️ 每日工作，你通常：",
-                options: [
-                    { text: "隨心做，有咩做咩", value: "P" },
-                    { text: "寫 to-do list，一項項完成", value: "J" }
-                ],
-                dimension: "PJ",
-                isTrap: false,
-                category: "work"
-            },
-            {
-                id: 24,
-                question: "📦 做嘢到一半有新 request，你會：",
-                options: [
-                    { text: "靈活調整，handle 新嘢先", value: "P" },
-                    { text: "堅持完成手頭上嘅嘢", value: "J" }
-                ],
-                dimension: "PJ",
-                isTrap: false,
-                category: "change"
-            },
-            {
-                id: 25,
-                question: "🏠 屋企收納，你嘅習慣係：",
-                options: [
-                    { text: "嘢放邊都得，揾到就得", value: "P" },
-                    { text: "每樣嘢有固定位置", value: "J" }
-                ],
-                dimension: "PJ",
-                isTrap: false,
-                category: "organization"
-            },
-            {
-                id: 26,
-                question: "⏰ 約朋友食飯，你會：",
-                options: [
-                    { text: "大概時間，到時再 confirm", value: "P" },
-                    { text: "準確時間地點，早到準備", value: "J" }
-                ],
-                dimension: "PJ",
-                isTrap: false,
-                category: "appointment"
-            },
-            {
-                id: 27,
-                question: "🎮 玩新 game，你點開始？",
-                options: [
-                    { text: "直接入 game 試下先", value: "P" },
-                    { text: "睇教學、攻略先開始", value: "J" }
-                ],
-                dimension: "PJ",
-                isTrap: false,
-                category: "gaming"
-            },
-            {
-                id: 28,
-                question: "🧠 你有冇專心做緊呢個測試？",
-                options: [
-                    { text: "有！我好專心㗎！", value: "correct" },
-                    { text: "冇，求其撳之嘛", value: "wrong" }
-                ],
-                dimension: "PJ",
-                isTrap: true,
-                hint: "🎭 專注度測試題"
-            }
+            // E/I
+            { id: 1, question: "🕒 星期五收工，同事約食飯，但你本來想返屋企：", options: [{ text: "即刻去！聚下傾偈", value: "E", emoji: "🍻" }, { text: "都係返屋企休息", value: "I", emoji: "🏠" }], dimension: "EI" },
+            { id: 2, question: "🚇 喺地鐵見到唔熟嘅同事，路程仲有幾個站：", options: [{ text: "主動打招呼傾偈", value: "E", emoji: "👋" }, { text: "睇手機避開交流", value: "I", emoji: "📱" }], dimension: "EI" },
+            { id: 3, question: "🎉 朋友生日飯局好多陌生人，你會：", options: [{ text: "主動識新朋友", value: "E", emoji: "🤝" }, { text: "黐住熟人就算", value: "I", emoji: "🧘" }], dimension: "EI" },
+            { id: 4, question: "📱 工作遇到難題，你通常會：", options: [{ text: "搵人傾下攞意見", value: "E", emoji: "🗣️" }, { text: "自己靜靜地鑽研", value: "I", emoji: "🕵️" }], dimension: "EI" },
+            { id: 5, question: "💬 心情唔好嗰陣，你會：", options: [{ text: "搵人傾訴發洩", value: "E", emoji: "📢" }, { text: "自己消化唔想煩人", value: "I", emoji: "😶" }], dimension: "EI" },
+            { id: 6, question: "🏖️ 理想嘅兩日假期係點過？", options: [{ text: "約朋友周圍去玩", value: "E", emoji: "🏃" }, { text: "係屋企做自己嘢", value: "I", emoji: "🛌" }], dimension: "EI" },
+            // S/N
+            { id: 8, question: "📊 做 Project 嗰陣，你更鍾意：", options: [{ text: "跟足步驟確保準確", value: "S", emoji: "📏" }, { text: "先諗大方向同意義", value: "N", emoji: "🔮" }], dimension: "SN" },
+            { id: 9, question: "🎯 老闆俾新任務，你第一時間諗：", options: [{ text: "具體要做乜同幾時交", value: "S", emoji: "🕒" }, { text: "任務背後有咩可能", value: "N", emoji: "💡" }], dimension: "SN" },
+            { id: 10, question: "📈 預測公司未來，你會：", options: [{ text: "睇返過去數據判斷", value: "S", emoji: "📉" }, { text: "想像趨勢同新機會", value: "N", emoji: "🚀" }], dimension: "SN" },
+            { id: 11, question: "🧩 解決問題時，你傾向：", options: [{ text: "用已知方法穩陣試", value: "S", emoji: "🛠️" }, { text: "諗新解決方案突破", value: "N", emoji: "🌀" }], dimension: "SN" },
+            { id: 12, question: "📚 學新嘢嗰陣，你鍾意：", options: [{ text: "睇 Manual 慢慢學", value: "S", emoji: "📖" }, { text: "掌握概念自己發揮", value: "N", emoji: "🎨" }], dimension: "SN" },
+            { id: 13, question: "🔍 睇報告嗰陣，你最先睇：", options: [{ text: "具體數據同表格", value: "S", emoji: "📊" }, { text: "結論同背後含義", value: "N", emoji: "🎯" }], dimension: "SN" },
+            // T/F
+            { id: 15, question: "⚖️ 同事做錯嘢影響到你，你會：", options: [{ text: "直接指出要求改正", value: "T", emoji: "🗯️" }, { text: "婉轉提醒費事尷尬", value: "F", emoji: "🤐" }], dimension: "TF" },
+            { id: 16, question: "💰 買嘢嗰陣，你最睇重：", options: [{ text: "性價比同實際功能", value: "T", emoji: "💵" }, { text: "個人喜好同感覺", value: "F", emoji: "💖" }], dimension: "TF" },
+            { id: 17, question: "🎪 公司活動揀方案，你會揀：", options: [{ text: "平啲但實際嘅方案", value: "T", emoji: "🏷️" }, { text: "大家會玩得開心啲", value: "F", emoji: "🎈" }], dimension: "TF" },
+            { id: 18, question: "📝 寫 Email 嗰陣，你最注重：", options: [{ text: "邏輯清晰內容準確", value: "T", emoji: "📍" }, { text: "語氣友善關係維護", value: "F", emoji: "☕" }], dimension: "TF" },
+            { id: 19, question: "🤝 團隊有分歧，你傾向：", options: [{ text: "用數據道理說服人", value: "T", emoji: "⚖️" }, { text: "尋求共識保持和諧", value: "F", emoji: "🌈" }], dimension: "TF" },
+            { id: 20, question: "🕰️ 做決策嗰陣，你首要考慮：", options: [{ text: "效率同最終結果", value: "T", emoji: "🏁" }, { text: "對團隊人嘅影響", value: "F", emoji: "👨‍👩‍👧‍👦" }], dimension: "TF" },
+            // P/J
+            { id: 22, question: "📅 假期去旅行，你鍾意：", options: [{ text: "去到邊玩到邊", value: "P", emoji: "🎒" }, { text: "提早 Plan 好晒行程", value: "J", emoji: "🗓️" }], dimension: "PJ" },
+            { id: 23, question: "🗓️ 每日工作，你通常：", options: [{ text: "隨心做，有咩做咩", value: "P", emoji: "🌊" }, { text: "跟 To-do List 做", value: "J", emoji: "✅" }], dimension: "PJ" },
+            { id: 24, question: "📦 做嘢一半有新 Request：", options: [{ text: "即刻轉身 Handle 新嘢", value: "P", emoji: "🤸" }, { text: "做埋手上嗰樣先算", value: "J", emoji: "🏗️" }], dimension: "PJ" },
+            { id: 25, question: "🏠 屋企收納習慣：", options: [{ text: "亂中有序揾到就得", value: "P", emoji: "🌪️" }, { text: "每件嘢有固定位置", value: "J", emoji: "📂" }], dimension: "PJ" },
+            { id: 26, question: "⏰ 約朋友食飯，你會：", options: [{ text: "去到附近再 Confirm", value: "P", emoji: "📍" }, { text: "準時或提早到場", value: "J", emoji: "🕔" }], dimension: "PJ" },
+            { id: 27, question: "🎮 玩新 Game，你會：", options: [{ text: "入去試咗先算", value: "P", emoji: "🕹️" }, { text: "睇咗攻略先開波", value: "J", emoji: "📑" }], dimension: "PJ" }
         ];
 
-        // 動態加題邏輯 (每組如果模糊會加2題)
-        const extraQuestions = {
-            "EI": [
-                {
-                    id: 29,
-                    question: "👥 公司 team building，你會參加：",
-                    options: [
-                        { text: "集體遊戲，熱鬧啲好玩！", value: "E" },
-                        { text: "小組傾偈，深度交流", value: "I" }
-                    ],
-                    dimension: "EI",
-                    isTrap: false,
-                    category: "team-building"
-                },
-                {
-                    id: 30,
-                    question: "📞 有問題要問同事，你會：",
-                    options: [
-                        { text: "直接打電話/面對面問", value: "E" },
-                        { text: "發訊息/電郵，唔想打擾", value: "I" }
-                    ],
-                    dimension: "EI",
-                    isTrap: false,
-                    category: "communication"
-                }
-            ],
-            "SN": [
-                {
-                    id: 31,
-                    question: "🎨 Design工作，你更注重：",
-                    options: [
-                        { text: "跟足 design spec，準確執行", value: "S" },
-                        { text: "創造新意念，突破傳統", value: "N" }
-                    ],
-                    dimension: "SN",
-                    isTrap: false,
-                    category: "design"
-                },
-                {
-                    id: 32,
-                    question: "📋 開會討論時，你傾向：",
-                    options: [
-                        { text: "講具體事實同數據", value: "S" },
-                        { text: "講大方向同願景", value: "N" }
-                    ],
-                    dimension: "SN",
-                    isTrap: false,
-                    category: "meeting"
-                }
-            ],
-            "TF": [
-                {
-                    id: 33,
-                    question: "📊 評估同事表現，你會：",
-                    options: [
-                        { text: "睇實際數據同成果", value: "T" },
-                        { text: "考慮佢嘅努力同團隊精神", value: "F" }
-                    ],
-                    dimension: "TF",
-                    isTrap: false,
-                    category: "evaluation"
-                },
-                {
-                    id: 34,
-                    question: "💼 請人時，你最重視：",
-                    options: [
-                        { text: "技能同經驗", value: "T" },
-                        { text: "性格同團隊 fit 唔 fit", value: "F" }
-                    ],
-                    dimension: "TF",
-                    isTrap: false,
-                    category: "hiring"
-                }
-            ],
-            "PJ": [
-                {
-                    id: 35,
-                    question: "📝 做報告時，你通常：",
-                    options: [
-                        { text: "有靈感就寫，隨心發揮", value: "P" },
-                        { text: "先寫大綱，再填充內容", value: "J" }
-                    ],
-                    dimension: "PJ",
-                    isTrap: false,
-                    category: "report-writing"
-                },
-                {
-                    id: 36,
-                    question: "🛒 去超市購物，你習慣：",
-                    options: [
-                        { text: "見到咩想買就買", value: "P" },
-                        { text: "跟 shopping list 買", value: "J" }
-                    ],
-                    dimension: "PJ",
-                    isTrap: false,
-                    category: "shopping"
-                }
-            ]
-        };
-
-        // 人格類型描述
         const typeDescriptions = {
-            "ESTJ": {
-                icon: "🏢",
-                title: "行政總監",
-                desc: "你係實幹型領袖！注重效率同秩序，鍾意按計劃行事，係團隊嘅穩定力量。"
-            },
-            "ESTP": {
-                icon: "🎲",
-                title: "創業家",
-                desc: "你靈活變通，鍾意即興發揮，善於把握機會，係解決問題嘅高手。"
-            },
-            "ESFJ": {
-                icon: "🤝",
-                title: "交際能手",
-                desc: "你重視人際和諧，善於照顧他人感受，係團隊嘅凝聚力所在。"
-            },
-            "ESFP": {
-                icon: "🎉",
-                title: "表演者",
-                desc: "你充滿活力，鍾意社交同娛樂，為團隊帶來歡樂氣氛。"
-            },
-            "ENTJ": {
-                icon: "👑",
-                title: "指揮官",
-                desc: "你係天生領袖，有遠見同決斷力，善於規劃同執行大型項目。"
-            },
-            "ENTP": {
-                icon: "💡",
-                title: "發明家",
-                desc: "你創意無限，鍾意挑戰傳統，善於辯論同提出新點子。"
-            },
-            "ENFJ": {
-                icon: "🌟",
-                title: "導師",
-                desc: "你善於激勵他人，有感染力，關注團隊成長同發展。"
-            },
-            "ENFP": {
-                icon: "🌈",
-                title: "倡導者",
-                desc: "你熱情洋溢，充滿可能性，善於連結不同人同想法。"
-            },
-            "ISTJ": {
-                icon: "📋",
-                title: "稽查員",
-                desc: "你認真負責，注重細節同規則，係團隊可靠嘅執行者。"
-            },
-            "ISTP": {
-                icon: "🔧",
-                title: "工匠",
-                desc: "你冷靜務實，善於分析同解決實際問題，手作能力強。"
-            },
-            "ISFJ": {
-                icon: "🛡️",
-                title: "守護者",
-                desc: "你細心體貼，保護團隊免受傷害，默默付出不求回報。"
-            },
-            "ISFP": {
-                icon: "🎨",
-                title: "藝術家",
-                desc: "你感性敏銳，注重當下體驗，善於用創意表達自己。"
-            },
-            "INTJ": {
-                icon: "🧠",
-                title: "建築師",
-                desc: "你係戰略大師，善於長遠規劃同系統思考，追求完美方案。"
-            },
-            "INTP": {
-                icon: "🔬",
-                title: "邏輯學家",
-                desc: "你熱愛知識同理論，善於分析複雜概念，追求真理。"
-            },
-            "INFJ": {
-                icon: "🔮",
-                title: "提倡者",
-                desc: "你有深度同理心，追求意義同理想，善於洞察他人內心。"
-            },
-            "INFP": {
-                icon: "💭",
-                title: "調停者",
-                desc: "你理想主義，重視個人價值觀，追求和諧同真實嘅自我表達。"
-            }
+            "ESTJ": { icon: "🏢", title: "行政總監", desc: "注重效率同秩序，鍾意按計劃行事。" },
+            "ESTP": { icon: "🎲", title: "創業家", desc: "靈活變通，善於把握即時機會。" },
+            "ESFJ": { icon: "🤝", title: "交際能手", desc: "重視人際和諧，善於照顧同事。" },
+            "ESFP": { icon: "🎉", title: "表演者", desc: "充滿活力，係團隊嘅開心果。" },
+            "ENTJ": { icon: "👑", title: "指揮官", desc: "有遠見同決斷力，天生嘅領袖。" },
+            "ENTP": { icon: "💡", title: "發明家", desc: "創意無限，鍾意挑戰傳統思維。" },
+            "ENFJ": { icon: "🌟", title: "導師", desc: "善於激勵他人，關注團隊發展。" },
+            "ENFP": { icon: "🌈", title: "倡導者", desc: "熱情洋溢，總能發現新可能性。" },
+            "ISTJ": { icon: "📋", title: "稽查員", desc: "認真負責，係最可靠嘅執行者。" },
+            "ISTP": { icon: "🔧", title: "工匠", desc: "冷靜務實，善於分析解決問題。" },
+            "ISFJ": { icon: "🛡️", title: "守護者", desc: "細心體貼，默默守護團隊利益。" },
+            "ISFP": { icon: "🎨", title: "藝術家", desc: "感性敏銳，鍾意用創意做嘢。" },
+            "INTJ": { icon: "🧠", title: "建築師", desc: "戰略大師，追求完美嘅系統。" },
+            "INTP": { icon: "🔬", title: "邏輯學家", desc: "熱愛知識，追求真理嘅分析者。" },
+            "INFJ": { icon: "🔮", title: "提倡者", desc: "有深度同理心，追求意義同理想。" },
+            "INFP": { icon: "💭", title: "調停者", desc: "理想主義，重視真實嘅自我表達。" }
         };
 
-        // 狀態變數
         let currentQuestionIndex = 0;
         let answers = [];
-        let trapCorrect = 0;
-        let totalTime = 0;
         let startTime = 0;
-        let questionStartTime = 0;
-        let questionOrder = [...questions];
-        let addedQuestions = { EI: false, SN: false, TF: false, PJ: false };
-        let dimensionScores = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, P: 0, J: 0 };
-        let dimensionCounts = { EI: 0, SN: 0, TF: 0, PJ: 0 };
 
-        // 工具函數
         function startQuiz() {
             document.getElementById('startPage').style.display = 'none';
             document.getElementById('quizPage').style.display = 'block';
-            document.getElementById('quizPage').classList.add('fade-in');
             startTime = Date.now();
-            questionOrder = [...questions]; // 複製題目順序
             showQuestion();
         }
 
         function showQuestion() {
-            if (currentQuestionIndex >= questionOrder.length) {
-                calculateResults();
-                return;
-            }
-            
-            const q = questionOrder[currentQuestionIndex];
-            questionStartTime = Date.now();
-            
-            // 更新進度條
-            const progress = ((currentQuestionIndex + 1) / questionOrder.length) * 100;
-            document.getElementById('progressBar').style.width = progress + '%';
-            
-            // 更新題號
-            document.getElementById('questionCounter').textContent = 
-                q.isTrap ? `🎭 驗證題 ${currentQuestionIndex + 1} / ${questionOrder.length}` : 
-                `第 ${currentQuestionIndex + 1} 題 / 共 ${questionOrder.length} 題`;
-            
-            // 更新題目
+            const q = questions[currentQuestionIndex];
+            document.getElementById('progressBar').style.width = ((currentQuestionIndex + 1) / questions.length) * 100 + '%';
+            document.getElementById('questionCounter').textContent = `第 ${currentQuestionIndex + 1} 題 / 共 ${questions.length} 題`;
             document.getElementById('questionText').textContent = q.question;
             
-            // 顯示/隱藏提示
-            const hintEl = document.getElementById('trapHint');
-            if (q.isTrap && q.hint) {
-                hintEl.textContent = q.hint;
-                hintEl.style.display = 'block';
-            } else {
-                hintEl.style.display = 'none';
-            }
-            
-            // 生成選項
-            const optionsContainer = document.getElementById('optionsContainer');
-            optionsContainer.innerHTML = '';
+            const container = document.getElementById('optionsContainer');
+            container.innerHTML = '';
             
             q.options.forEach((opt, index) => {
                 const div = document.createElement('div');
                 div.className = 'option';
                 div.innerHTML = `
-                    <div class="option-radio"></div>
+                    <div class="option-emoji">${opt.emoji}</div>
                     <div class="option-text">${opt.text}</div>
                 `;
-                div.onclick = () => selectOption(index, opt.value, q.dimension);
-                optionsContainer.appendChild(div);
+                div.onclick = () => selectOption(index, opt.value);
+                container.appendChild(div);
             });
-            
-            // 重置按鈕
             document.getElementById('nextBtn').classList.remove('active');
         }
 
-        function selectOption(index, value, dimension) {
-            // 記錄答案
-            answers[currentQuestionIndex] = {
-                value: value,
-                dimension: dimension,
-                time: Date.now() - questionStartTime
-            };
-            
-            // 更新 UI
-            const options = document.querySelectorAll('.option');
-            options.forEach((opt, i) => {
+        function selectOption(index, value) {
+            answers[currentQuestionIndex] = value;
+            document.querySelectorAll('.option').forEach((opt, i) => {
                 opt.classList.toggle('selected', i === index);
             });
-            
-            // 啟用下一題按鈕
             document.getElementById('nextBtn').classList.add('active');
         }
 
         function nextQuestion() {
             if (!answers[currentQuestionIndex]) return;
-            
-            // 檢查是否需要動態加題
-            checkAndAddExtraQuestions();
-            
             currentQuestionIndex++;
-            
-            if (currentQuestionIndex >= questionOrder.length) {
+            if (currentQuestionIndex >= questions.length) {
                 calculateResults();
             } else {
                 showQuestion();
             }
         }
 
-        function checkAndAddExtraQuestions() {
-            if (currentQuestionIndex < 6) return; // 未夠6題唔檢查
-            
-            // 檢查每個維度嘅分數
-            const dimensions = ['EI', 'SN', 'TF', 'PJ'];
-            dimensions.forEach(dim => {
-                const dimAnswers = answers.filter(a => a && a.dimension === dim && !questionOrder.find(q => q.id === a.id)?.isTrap);
-                if (dimAnswers.length >= 4) {
-                    const eCount = dimAnswers.filter(a => a.value === dim[0]).length;
-                    const iCount = dimAnswers.filter(a => a.value === dim[1]).length;
-                    const total = dimAnswers.length;
-                    
-                    // 如果分數接近 (45-55%) 且未加過題
-                    const ratio = eCount / total;
-                    if (ratio >= 0.45 && ratio <= 0.55 && !addedQuestions[dim]) {
-                        // 加題
-                        const extraQ1 = extraQuestions[dim][0];
-                        const extraQ2 = extraQuestions[dim][1];
-                        questionOrder.push(extraQ1, extraQ2);
-                        addedQuestions[dim] = true;
-                    }
-                }
-            });
-        }
-
         function calculateResults() {
             document.getElementById('quizPage').style.display = 'none';
             document.getElementById('resultPage').style.display = 'block';
             
-            // 重置計數
-            dimensionScores = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, P: 0, J: 0 };
-            dimensionCounts = { EI: 0, SN: 0, TF: 0, PJ: 0 };
-            trapCorrect = 0;
-            totalTime = Date.now() - startTime;
+            let counts = { E:0, I:0, S:0, N:0, T:0, F:0, P:0, J:0 };
+            answers.forEach(val => counts[val]++);
             
-            // 計算分數
-            answers.forEach((ans, index) => {
-                if (ans) {
-                    const q = questionOrder[index];
-                    if (q && q.isTrap) {
-                        if (ans.value === 'correct') trapCorrect++;
-                    } else if (ans.dimension && ans.value) {
-                        dimensionScores[ans.value]++;
-                        dimensionCounts[ans.dimension]++;
-                    }
-                }
-            });
-            
-            // 計算百分比
-            const ePercent = dimensionCounts.EI > 0 ? Math.round((dimensionScores.E / dimensionCounts.EI) * 100) : 50;
-            const sPercent = dimensionCounts.SN > 0 ? Math.round((dimensionScores.S / dimensionCounts.SN) * 100) : 50;
-            const tPercent = dimensionCounts.TF > 0 ? Math.round((dimensionScores.T / dimensionCounts.TF) * 100) : 50;
-            const pPercent = dimensionCounts.PJ > 0 ? Math.round((dimensionScores.P / dimensionCounts.PJ) * 100) : 50;
-            
-            // 決定字母
-            const finalType = 
-                (ePercent >= 50 ? 'E' : 'I') +
-                (sPercent >= 50 ? 'S' : 'N') +
-                (tPercent >= 50 ? 'T' : 'F') +
-                (pPercent >= 50 ? 'P' : 'J');
-            
-            // 更新結果
-            const result = typeDescriptions[finalType] || {
-                icon: "❓",
-                title: "未知類型",
-                desc: "你的結果比較特別，需要更多分析。"
-            };
+            const type = (counts.E >= counts.I ? 'E':'I') + (counts.S >= counts.N ? 'S':'N') + (counts.T >= counts.F ? 'T':'F') + (counts.P >= counts.J ? 'P':'J');
+            const result = typeDescriptions[type];
             
             document.getElementById('resultIcon').textContent = result.icon;
-            document.getElementById('resultType').textContent = finalType;
-            document.getElementById('resultTitle').textContent = '你係 — ' + result.title;
+            document.getElementById('resultType').textContent = type;
+            document.getElementById('resultTitle').textContent = `你係 — ${result.title}`;
             document.getElementById('resultDesc').textContent = result.desc;
             
-            // 更新維度分數
-            const scoresContainer = document.getElementById('dimensionScores');
-            scoresContainer.innerHTML = '';
-            
-            const dimensions = [
-                { letter: 'E', name: 'External charging', percent: ePercent, opposite: 'I', oppositeName: 'Internal energy' },
-                { letter: 'S', name: 'See facts first', percent: sPercent, opposite: 'N', oppositeName: 'Need vision' },
-                { letter: 'T', name: 'Thinking first', percent: tPercent, opposite: 'F', oppositeName: 'Feeling first' },
-                { letter: 'P', name: 'Play by ear', percent: pPercent, opposite: 'J', oppositeName: 'Just plan it' }
-            ];
-            
-            dimensions.forEach(dim => {
-                const scoreItem = document.createElement('div');
-                scoreItem.className = 'score-item';
-                scoreItem.innerHTML = `
-                    <div class="score-letter">${dim.letter}/${dim.opposite}</div>
-                    <div class="score-name">${dim.letter}: ${dim.name}</div>
-                    <div class="score-bar-container">
-                        <div class="score-bar-fill" style="width: ${dim.percent}%">${dim.percent}%</div>
-                    </div>
-                    <div class="score-percent">${dim.percent}% ${dim.letter} / ${100-dim.percent}% ${dim.opposite}</div>
-                `;
-                scoresContainer.appendChild(scoreItem);
+            const scores = document.getElementById('dimensionScores');
+            scores.innerHTML = '';
+            const dims = [{l:'E', r:'I', n:'能量'}, {l:'S', r:'N', n:'資訊'}, {l:'T', r:'F', n:'決策'}, {l:'P', r:'J', n:'風格'}];
+            dims.forEach(d => {
+                const p = Math.round((counts[d.l] / 6) * 100);
+                scores.innerHTML += `
+                    <div class="score-item">
+                        <div style="display:flex; justify-content:space-between; font-weight:bold;">
+                            <span>${d.l} (${p}%)</span><span>${d.r} (${100-p}%)</span>
+                        </div>
+                        <div class="score-bar-container"><div class="score-bar-fill" style="width:${p}%"></div></div>
+                    </div>`;
             });
-            
-            // 更新統計
-            const avgTime = Math.round(totalTime / questionOrder.length / 1000);
-            document.getElementById('trapScore').textContent = `測試題準確度：${trapCorrect}/4 題`;
-            document.getElementById('timeStats').textContent = `平均 ${avgTime}秒/題，總時間 ${Math.round(totalTime/1000)}秒`;
-            
-            // 更新可靠度
-            let stars = '';
-            let reliabilityText = '';
-            
-            if (trapCorrect === 4 && avgTime >= 3) {
-                stars = '⭐⭐⭐⭐⭐';
-                reliabilityText = '非常可靠！你認真作答 (平均 ' + avgTime + ' 秒/題)';
-            } else if (trapCorrect >= 2 && avgTime >= 2) {
-                stars = '⭐⭐⭐⭐';
-                reliabilityText = '可靠 (' + trapCorrect + '/4 測試題正確)';
-            } else {
-                stars = '⭐⭐⭐';
-                reliabilityText = '參考性質 (建議放鬆時再測試一次)';
-            }
-            
-            document.getElementById('reliabilityStars').textContent = stars;
-            document.getElementById('reliabilityText').textContent = reliabilityText;
         }
 
         function restartQuiz() {
-            currentQuestionIndex = 0;
-            answers = [];
-            trapCorrect = 0;
-            totalTime = 0;
-            startTime = 0;
-            questionOrder = [...questions];
-            addedQuestions = { EI: false, SN: false, TF: false, PJ: false };
-            dimensionScores = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, P: 0, J: 0 };
-            dimensionCounts = { EI: 0, SN: 0, TF: 0, PJ: 0 };
-            
+            currentQuestionIndex = 0; answers = [];
             document.getElementById('resultPage').style.display = 'none';
             document.getElementById('startPage').style.display = 'block';
-            document.getElementById('startPage').classList.add('fade-in');
         }
     </script>
 </body>
