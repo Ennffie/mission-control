@@ -3,236 +3,216 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>性格大冒險 | Luna Engine 🌙</title>
+    <title>性格大冒險 v2.0 | Luna Engine 🌙</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex; justify-content: center; align-items: center;
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            background-size: 400% 400%; animation: grad 15s ease infinite;
+            min-height: 100vh; display: flex; justify-content: center; align-items: center;
             padding: 15px; overflow: hidden;
         }
-        .container {
-            background: white; border-radius: 30px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            max-width: 500px; width: 100%;
-            padding: 30px 20px; position: relative;
-            text-align: center;
-        }
-        .progress-bar {
-            height: 6px; background: #eee; border-radius: 10px;
-            margin-bottom: 25px; overflow: hidden;
-        }
-        .progress-fill {
-            height: 100%; background: #8A2BE2; width: 0%;
-            transition: width 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        .q-header { font-size: 14px; color: #888; margin-bottom: 10px; font-weight: bold; }
-        .question-text {
-            font-size: 24px; font-weight: 800; color: #333;
-            margin-bottom: 30px; line-height: 1.4;
-            min-height: 70px; display: flex; align-items: center; justify-content: center;
-        }
+        @keyframes grad { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
         
-        /* 模式 1: 左右大方塊 */
-        .options-grid { display: flex; gap: 15px; }
-        .option-card {
-            flex: 1; padding: 25px 15px; border: 3px solid #f0f0f0;
-            border-radius: 20px; cursor: pointer;
-            transition: all 0.2s ease;
-            display: flex; flex-direction: column; align-items: center; gap: 15px;
-            background: #fcfcfc;
+        .container {
+            background: rgba(255,255,255,0.95); border-radius: 40px;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+            max-width: 550px; width: 100%; min-height: 600px;
+            padding: 40px 30px; position: relative;
+            display: flex; flex-direction: column;
         }
-        .option-card:active { transform: scale(0.95); background: #f0f2ff; border-color: #8A2BE2; }
-        .card-emoji { font-size: 64px; }
-        .card-text { font-size: 18px; font-weight: 700; color: #444; }
 
-        /* 模式 2: 滑塊 Slider */
-        .slider-container { display: none; padding: 20px 10px; }
+        /* Cover Page */
+        #cover-page { text-align: center; display: flex; flex-direction: column; justify-content: center; height: 100%; flex-grow: 1; }
+        .cover-emoji { font-size: 100px; margin-bottom: 20px; animation: bounce 2s infinite; }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+        .cover-title { font-size: 42px; font-weight: 900; color: #333; margin-bottom: 10px; line-height: 1.1; }
+        .cover-subtitle { font-size: 18px; color: #666; margin-bottom: 40px; }
+        .start-btn {
+            background: linear-gradient(135deg, #8A2BE2, #FF69B4);
+            color: white; border: none; padding: 25px 60px; border-radius: 100px;
+            font-size: 24px; font-weight: 900; cursor: pointer;
+            box-shadow: 0 10px 30px rgba(138, 43, 226, 0.4); transition: 0.3s;
+        }
+        .start-btn:hover { transform: scale(1.1); box-shadow: 0 15px 40px rgba(138, 43, 226, 0.6); }
+
+        /* Quiz UI */
+        #quiz-ui { display: none; }
+        .progress-bar { height: 12px; background: #eee; border-radius: 20px; margin-bottom: 30px; overflow: hidden; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #8A2BE2, #FF69B4); width: 0%; transition: width 0.4s ease; }
+        .question-text { font-size: 28px; font-weight: 900; color: #222; margin-bottom: 35px; line-height: 1.3; }
+
+        /* Layout Types */
+        .options-box { display: flex; gap: 15px; width: 100%; }
+        .options-row { flex-direction: row; }
+        .options-col { flex-direction: column; }
+        
+        .option-card {
+            flex: 1; padding: 30px 20px; border: 4px solid #f0f0f0;
+            border-radius: 25px; cursor: pointer; transition: 0.2s;
+            display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 15px;
+            background: white; text-align: center;
+        }
+        .option-card:hover { border-color: #8A2BE2; background: #f8f0ff; transform: translateY(-5px); }
+        .card-emoji { font-size: 70px; }
+        .card-text { font-size: 20px; font-weight: 800; color: #333; }
+
+        /* Slider Mode */
+        .slider-ui { display: none; padding: 20px 0; }
+        .slider-labels { display: flex; justify-content: space-between; margin-bottom: 20px; }
+        .slider-label { font-size: 18px; font-weight: 900; color: #444; width: 45%; }
         .range-slider {
-            width: 100%; height: 15px; border-radius: 10px;
-            background: #eee; outline: none; -webkit-appearance: none;
-            margin: 30px 0;
+            width: 100%; height: 25px; border-radius: 20px;
+            background: #eee; outline: none; -webkit-appearance: none; margin: 40px 0;
         }
         .range-slider::-webkit-slider-thumb {
-            -webkit-appearance: none; width: 35px; height: 35px;
+            -webkit-appearance: none; width: 50px; height: 50px;
             background: #8A2BE2; border-radius: 50%; cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3); border: 4px solid white;
         }
-        .slider-labels { display: flex; justify-content: space-between; font-weight: bold; color: #666; }
         .confirm-btn {
-            margin-top: 20px; padding: 15px 40px; background: #8A2BE2;
-            color: white; border: none; border-radius: 50px; font-weight: bold;
-            cursor: pointer; display: inline-block;
+            width: 100%; padding: 20px; background: #333; color: white;
+            border: none; border-radius: 20px; font-size: 20px; font-weight: 800; cursor: pointer;
         }
 
-        /* 動畫 */
-        .fade-out { opacity: 0; transform: translateX(-20px); transition: 0.2s; }
-        .fade-in { opacity: 1; transform: translateX(0); transition: 0.2s; }
+        /* Secret Sauce:吐槽 */
+        #luna-talk { position: absolute; top: -50px; left: 0; width: 100%; color: white; font-weight: bold; font-style: italic; opacity: 0; transition: 0.5s; }
+        .talk-show { opacity: 1 !important; top: -30px !important; }
     </style>
 </head>
 <body>
-    <div class="container" id="app">
-        <div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
-        <div class="q-header" id="q-counter">準備開始...</div>
-        <div class="question-text" id="q-text">Luna 性格大冒險</div>
-        
-        <!-- 點擊模式 -->
-        <div class="options-grid" id="grid-mode">
-            <div class="option-card" id="optA" onclick="handleSelect('A')">
-                <div class="card-emoji" id="emojiA">🚀</div>
-                <div class="card-text" id="textA">加載中</div>
-            </div>
-            <div class="option-card" id="optB" onclick="handleSelect('B')">
-                <div class="card-emoji" id="emojiB">✨</div>
-                <div class="card-text" id="textB">加載中</div>
-            </div>
+    <div id="luna-talk">Bro，認真啲答呀！🤫</div>
+    <div class="container">
+        <!-- START PAGE -->
+        <div id="cover-page">
+            <div class="cover-emoji">🌙✨</div>
+            <h1 class="cover-title">香港地<br>生存性格測試</h1>
+            <p class="cover-subtitle">搵出你潛藏喺骨子裡嘅「奇怪職業」！</p>
+            <button class="start-btn" onclick="start()">開始冒險 🚀</button>
         </div>
 
-        <!-- 滑塊模式 -->
-        <div class="slider-container" id="slider-mode">
-            <div class="slider-labels">
-                <span id="labelLeft">左</span>
-                <span id="labelRight">右</span>
+        <!-- QUIZ PAGE -->
+        <div id="quiz-ui">
+            <div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
+            <div class="question-text" id="q-text">加載中...</div>
+            
+            <div class="options-box" id="options-container"></div>
+
+            <div class="slider-ui" id="slider-container">
+                <div class="slider-labels">
+                    <span class="slider-label" id="labelLeft" style="text-align:left"></span>
+                    <span class="slider-label" id="labelRight" style="text-align:right"></span>
+                </div>
+                <input type="range" min="0" max="100" value="50" class="range-slider" id="slider">
+                <button class="confirm-btn" onclick="handleSlider()">決定係你！🎯</button>
             </div>
-            <input type="range" min="0" max="100" value="50" class="range-slider" id="slider">
-            <button class="confirm-btn" onclick="handleSlider()">確定 🎯</button>
         </div>
     </div>
 
     <script>
-        const coreQuestions = [
-            { id: 1, type: 'grid', dim: 'EI', q: "收工之後，你通常會點樣「充電」？", A: "約同事去 Happy Hour 🍺", AE: "🍺", B: "自己匿返屋企打機/睇書 🎮", BE: "🏠" },
-            { id: 2, type: 'grid', dim: 'SN', q: "面對一個新 Project，你會先睇：", A: "具體數據同現有資源 📊", AE: "📊", B: "未來嘅發展潛力同概念 💡", BE: "🔮" },
-            { id: 3, type: 'slider', dim: 'TF', q: "朋友做錯嘢俾老闆鬧，你嘅反應係：", left: "分析佢做錯乜 🧩", right: "安慰佢嘅感受 ❤️" },
-            { id: 4, type: 'grid', dim: 'PJ', q: "星期六日嘅行程，你通常係：", A: "一早密密麻麻，跟足計劃 🗓️", AE: "🗓️", B: "隨心所欲，到時先算 🌊", BE: "🎒" },
-            { id: 5, type: 'grid', dim: 'TRAP', q: "老實講，你係咪亂撳緊答案？", A: "我係認真嘅！🔥", AE: "🔥", B: "你吹我唔脹 🤪", BE: "🤪" },
-            { id: 6, type: 'slider', dim: 'EI', q: "喺大排筵席嘅 Party 入面：", left: "靜靜地坐一邊 🧘", right: "全場走識新朋友 🎤" },
-            { id: 7, type: 'grid', dim: 'SN', q: "你比較鍾意睇邊類書/戲？", A: "紀實、傳記、真實故事 📖", AE: "📖", B: "科幻、奇幻、想像力爆發 🛸", BE: "🚀" },
-            { id: 8, type: 'grid', dim: 'TF', q: "工作分歧時，你最怕邊樣？", A: "逻辑唔通，做錯決策 ❌", AE: "⚖️", B: "傷咗感情，大家唔開心 💔", BE: "🤝" },
-            { id: 9, type: 'slider', dim: 'PJ', q: "你嘅書枱通常係點樣嘅？", left: "亂中有序 🎨", right: "整整齊齊 ✨" }
+        const questions = [
+            { id: 1, type: 'grid', layout: 'row', dim: 'EI', q: "收工之後，你通常會點樣「充電」？", A: "搵隊友落吧 🍺", AE: "🍺", B: "自己匿埋打機 🏠", BE: "🎮" },
+            { id: 2, type: 'grid', layout: 'col', dim: 'SN', q: "喺地鐵見到唔熟嘅同事，你會：", A: "「喂！咁橋呀！」(然後搵話題)", AE: "🗣️", B: "戴返好耳機，扮睇唔到", BE: "🎧" },
+            { id: 3, type: 'slider', dim: 'TF', q: "朋友俾人呃咗錢，你第一時間：", left: "笑佢笨 (分析點解被呃) 🧩", right: "安慰佢 (一齊鬧個騙子) ❤️" },
+            { id: 4, type: 'grid', layout: 'row', dim: 'PJ', q: "你去旅行嘅行程通常係：", A: "Excel 表跟到足 🗓️", AE: "📊", B: "去到機場先諗去邊 🎒", BE: "🌊" },
+            { id: 5, type: 'grid', layout: 'col', dim: 'TRAP', q: "老實講，你係咪亂撳緊？", A: "我係認真嘅！🔥", AE: "🔥", B: "你吹我唔脹 🤪", BE: "🤪" },
+            { id: 6, type: 'slider', dim: 'EI', q: "喺一個 50 人嘅 Party 入面：", left: "匿喺角落玩電話 🧘", right: "做全場嘅焦點 🎤" },
+            { id: 7, type: 'grid', layout: 'row', dim: 'SN', q: "你比較欣賞邊種人？", A: "踏實、注重數據 📐", AE: "🧱", B: "有遠見、天馬行空 🚀", BE: "🔮" },
+            { id: 8, type: 'grid', layout: 'col', dim: 'TF', q: "做決定時，你優先考慮：", A: "效率同埋邏輯 ⚖️", AE: "🧠", B: "大家嘅面子同感受 ❤️", BE: "🤝" },
+            { id: 9, type: 'slider', dim: 'PJ', q: "你嘅房間整潔程度係：", left: "好似被炸彈炸過 🌪️", right: "五星級酒店咁乾淨 ✨" }
         ];
-
-        const extraQuestions = {
-            'EI': { type: 'grid', dim: 'EI', q: "【加插題】遇到難題，你會點搵答案？", A: "搵人傾下攞意見 🗣️", AE: "🗣️", B: "自己上網搵資料 💻", BE: "🕵️" },
-            'SN': { type: 'grid', dim: 'SN', q: "【加插題】老闆講未來藍圖，你心諗：", A: "佢畫緊大餅？實際點做先？ 🤨", AE: "🤨", B: "好正喎！好有遠見！ ✨", BE: "🤩" },
-            'TF': { type: 'grid', dim: 'TF', q: "【加插題】解僱一個表現差但好老友嘅員工：", A: "為公司好，一定要炒 ⚖️", AE: "💼", B: "真係好難落手，想再俾機會 😭", BE: "🥺" },
-            'PJ': { type: 'grid', dim: 'PJ', q: "【加插題】如果要你執屋，你會：", A: "一次過執晒所有嘢 🧹", AE: "🧹", B: "執到邊算到邊 📦", BE: "🤷" }
-        };
 
         let currentIdx = 0;
         let scores = { E:0, I:0, S:0, N:0, T:0, F:0, P:0, J:0 };
-        let results = [];
         let startTime = Date.now();
-        let qStartTime = Date.now();
-        let questionPool = [...coreQuestions];
+        let results = [];
 
-        function updateUI() {
-            const q = questionPool[currentIdx];
-            const progress = (currentIdx / questionPool.length) * 100;
-            document.getElementById('progress').style.width = progress + '%';
-            document.getElementById('q-counter').innerText = `問題 ${currentIdx + 1} / ${questionPool.length}`;
+        function start() {
+            document.getElementById('cover-page').style.display = 'none';
+            document.getElementById('quiz-ui').style.display = 'block';
+            showQ();
+        }
+
+        function showQ() {
+            const q = questions[currentIdx];
+            document.getElementById('progress').style.width = (currentIdx / questions.length) * 100 + '%';
+            document.getElementById('q-text').innerText = q.q;
             
-            const textEl = document.getElementById('q-text');
-            textEl.classList.remove('fade-in');
-            void textEl.offsetWidth; // trigger reflow
-            textEl.classList.add('fade-in');
-            textEl.innerText = q.q;
-
+            const container = document.getElementById('options-container');
+            const sliderBox = document.getElementById('slider-container');
+            container.innerHTML = '';
+            
             if (q.type === 'grid') {
-                document.getElementById('grid-mode').style.display = 'flex';
-                document.getElementById('slider-mode').style.display = 'none';
-                document.getElementById('emojiA').innerText = q.AE;
-                document.getElementById('textA').innerText = q.A;
-                document.getElementById('emojiB').innerText = q.BE;
-                document.getElementById('textB').innerText = q.B;
+                container.style.display = 'flex';
+                sliderBox.style.display = 'none';
+                container.className = 'options-box ' + (q.layout === 'row' ? 'options-row' : 'options-col');
+                
+                ['A', 'B'].forEach(type => {
+                    const card = document.createElement('div');
+                    card.className = 'option-card';
+                    card.innerHTML = `<div class="card-emoji">${q[type+'E']}</div><div class="card-text">${q[type]}</div>`;
+                    card.onclick = () => handleSelect(type);
+                    container.appendChild(card);
+                });
             } else {
-                document.getElementById('grid-mode').style.display = 'none';
-                document.getElementById('slider-mode').style.display = 'block';
+                container.style.display = 'none';
+                sliderBox.style.display = 'block';
                 document.getElementById('labelLeft').innerText = q.left;
                 document.getElementById('labelRight').innerText = q.right;
                 document.getElementById('slider').value = 50;
             }
-            qStartTime = Date.now();
+
+            // Luna 吐槽
+            if (currentIdx === 4) talk("呢題係陷阱嚟架...😏");
+            if (currentIdx === 7) talk("就快搞掂，頂住呀 Bro！💪");
+        }
+
+        function talk(txt) {
+            const el = document.getElementById('luna-talk');
+            el.innerText = txt;
+            el.classList.add('talk-show');
+            setTimeout(() => el.classList.remove('talk-show'), 3000);
         }
 
         function handleSelect(choice) {
-            const q = questionPool[currentIdx];
-            const duration = Date.now() - qStartTime;
-            
+            const q = questions[currentIdx];
             if (q.dim !== 'TRAP') {
-                const val = (choice === 'A') ? q.dim[0] : q.dim[1];
-                scores[val] += 10; // Basic weight
+                scores[choice === 'A' ? q.dim[0] : q.dim[1]] += 10;
             } else if (choice === 'B') {
                 results.push({ trap: 'fail' });
             }
-
-            results.push({ id: q.id, choice, duration });
             next();
         }
 
         function handleSlider() {
-            const q = questionPool[currentIdx];
+            const q = questions[currentIdx];
             const val = parseInt(document.getElementById('slider').value);
-            const duration = Date.now() - qStartTime;
-            
-            // Weight based on slider position
-            if (val < 50) {
-                scores[q.dim[0]] += (50 - val) / 5;
-            } else {
-                scores[q.dim[1]] += (val - 50) / 5;
-            }
-            
-            results.push({ id: q.id, val, duration });
+            if (val < 50) scores[q.dim[0]] += (50-val)/5;
+            else scores[q.dim[1]] += (val-50)/5;
             next();
         }
 
         function next() {
             currentIdx++;
-            // Borderline detection logic after initial core
-            if (currentIdx === 9) {
-                const dims = ['EI', 'SN', 'TF', 'PJ'];
-                dims.forEach(d => {
-                    const s1 = scores[d[0]];
-                    const s2 = scores[d[1]];
-                    const total = s1 + s2;
-                    if (total > 0) {
-                        const ratio = s1 / total;
-                        if (ratio > 0.4 && ratio < 0.6) {
-                            questionPool.push(extraQuestions[d]);
-                        }
-                    }
-                });
-            }
-
-            if (currentIdx < questionPool.length) {
-                updateUI();
-            } else {
-                finish();
-            }
+            if (currentIdx < questions.length) showQ();
+            else finish();
         }
 
         function finish() {
-            const finalScores = {
+            const final = {
                 EI: Math.round((scores.E / (scores.E + scores.I || 1)) * 100),
                 SN: Math.round((scores.S / (scores.S + scores.N || 1)) * 100),
                 TF: Math.round((scores.T / (scores.T + scores.F || 1)) * 100),
                 PJ: Math.round((scores.P / (scores.P + scores.J || 1)) * 100)
             };
-            const type = (finalScores.EI >= 50 ? 'E':'I') + (finalScores.SN >= 50 ? 'S':'N') + (finalScores.TF >= 50 ? 'T':'F') + (finalScores.PJ >= 50 ? 'P':'J');
-            
+            const type = (final.EI >= 50 ? 'E':'I') + (final.SN >= 50 ? 'S':'N') + (final.TF >= 50 ? 'T':'F') + (final.PJ >= 50 ? 'P':'J');
             localStorage.setItem('luna_mbti_result', JSON.stringify({
-                type,
-                scores: finalScores,
-                time: Math.round((Date.now() - startTime) / 1000),
+                type, scores: final, time: Math.round((Date.now()-startTime)/1000),
                 traps: results.filter(r => r.trap === 'fail').length
             }));
-            
             window.location.href = 'mbti_result.html';
         }
-
-        updateUI();
     </script>
 </body>
 </html>
