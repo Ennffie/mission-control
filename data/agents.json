@@ -1,0 +1,70 @@
+{
+  "version": "1.0.0",
+  "team": [
+    {
+      "id": "luna",
+      "name": "Luna",
+      "nameZh": "露娜",
+      "role": "Chief of Staff",
+      "roleZh": "總管",
+      "emoji": "🌙",
+      "color": "#E67E22",
+      "status": "active",
+      "description": "協調所有 Agent，直接同 Enfield 溝通",
+      "skills": ["項目管理", "溝通", "自動化"],
+      "lastActive": "2026-02-20T09:00:00+08:00"
+    },
+    {
+      "id": "wealth",
+      "name": "Wealth",
+      "nameZh": "財富",
+      "role": "Money Advisor",
+      "roleZh": "理財顧問",
+      "emoji": "💰",
+      "color": "#2ECC71",
+      "status": "standby",
+      "description": "搵錢機會、side project、投資建議",
+      "skills": ["商業分析", "投資研究", "機會發掘"],
+      "lastActive": null
+    },
+    {
+      "id": "health",
+      "name": "Health",
+      "nameZh": "健康",
+      "role": "Health Coach",
+      "roleZh": "健康教練",
+      "emoji": "🩺",
+      "color": "#E74C3C",
+      "status": "standby",
+      "description": "血壓提醒、飲食建議、運動追蹤",
+      "skills": ["健康監測", "飲食建議", "運動規劃"],
+      "lastActive": null
+    },
+    {
+      "id": "edu",
+      "name": "Edu",
+      "nameZh": "學習",
+      "role": "Learning Guide",
+      "roleZh": "學習導師",
+      "emoji": "📚",
+      "color": "#3498DB",
+      "status": "standby",
+      "description": "小朋友學習資源、新點子、四年級課程",
+      "skills": ["教育資源", "學習方法", "課程規劃"],
+      "lastActive": null
+    },
+    {
+      "id": "auto",
+      "name": "Auto",
+      "nameZh": "自動",
+      "role": "Automation Engineer",
+      "roleZh": "自動化工程師",
+      "emoji": "🤖",
+      "color": "#9B59B6",
+      "status": "standby",
+      "description": "自動化 workflow、cron 管理、系統整合",
+      "skills": ["程式編寫", "系統整合", "流程自動化"],
+      "lastActive": null
+    }
+  ]
+}

@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luna Mission Control 🌙</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0d1117;
+            --bg-secondary: #161b22;
+            --bg-tertiary: #21262d;
+            --text-primary: #e6edf3;
+            --text-secondary: #7d8590;
+            --border: #30363d;
+            --accent-orange: #E67E22;
+            --accent-green: #2ECC71;
+            --accent-blue: #3498DB;
+            --accent-purple: #9B59B6;
+            --accent-red: #E74C3C;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 24px;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 32px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            font-size: 32px;
+        }
+
+        .logo h1 {
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .logo p {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .mission-statement {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px 24px;
+            max-width: 500px;
+        }
+
+        .mission-statement p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        /* Grid Layout */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 24px;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .card-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .card-icon {
+            font-size: 20px;
+        }
+
+        .badge {
+            background: var(--bg-tertiary);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        /* Tasks */
+        .task-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .task-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px;
+            background: var(--bg-tertiary);
+            border-radius: 10px;
+            border-left: 3px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .task-item:hover {
+            background: #30363d;
+        }
+
+        .task-item.active { border-left-color: var(--accent-green); }
+        .task-item.pending { border-left-color: var(--accent-orange); }
+        .task-item.in-progress { border-left-color: var(--accent-blue); }
+
+        .task-status {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .task-status.active { background: var(--accent-green); box-shadow: 0 0 8px var(--accent-green); }
+        .task-status.pending { background: var(--accent-orange); }
+        .task-status.in-progress { background: var(--accent-blue); }
+
+        .task-info {
+            flex: 1;
+        }
+
+        .task-title {
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .task-meta {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .task-agent {
+            font-size: 11px;
+            padding: 2px 8px;
+            background: var(--bg-secondary);
+            border-radius: 4px;
+            color: var(--text-secondary);
+        }
+
+        /* Agents */
+        .agent-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 16px;
+        }
+
+        .agent-card {
+            background: var(--bg-tertiary);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .agent-card:hover {
+            transform: translateY(-2px);
+            border-color: var(--border);
+        }
+
+        .agent-card.active {
+            border-color: var(--accent-orange);
+        }
+
+        .agent-emoji {
+            font-size: 40px;
+            margin-bottom: 12px;
+        }
+
+        .agent-name {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .agent-role {
+            font-size: 11px;
+            color: var(--text-secondary);
+        }
+
+        .agent-status {
+            margin-top: 8px;
+            font-size: 10px;
+            padding: 2px 8px;
+            border-radius: 10px;
+            display: inline-block;
+        }
+
+        .agent-status.active {
+            background: rgba(46, 204, 113, 0.2);
+            color: var(--accent-green);
+        }
+
+        .agent-status.standby {
+            background: rgba(125, 133, 144, 0.2);
+            color: var(--text-secondary);
+        }
+
+        /* Health */
+        .health-goals {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .goal-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px;
+            background: var(--bg-tertiary);
+            border-radius: 8px;
+        }
+
+        .goal-icon {
+            color: var(--accent-red);
+        }
+
+        .reminder-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .reminder-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 14px;
+            background: var(--bg-tertiary);
+            border-radius: 8px;
+        }
+
+        .reminder-time {
+            font-size: 12px;
+            color: var(--text-secondary);
+            background: var(--bg-secondary);
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 12px;
+        }
+
+        .footer span {
+            color: var(--accent-orange);
+        }
+
+        /* Full width card */
+        .card-full {
+            grid-column: 1 / -1;
+        }
+
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header {
+                flex-direction: column;
+                gap: 16px;
+                align-items: flex-start;
+            }
+            
+            .mission-statement {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">
+                <span class="logo-icon">🌙</span>
+                <div>
+                    <h1>Luna Mission Control</h1>
+                    <p>v1.0.0 | Last updated: <span id="last-updated">--</span></p>
+                </div>
+            </div>
+            <div class="mission-statement">
+                <p id="mission-text">Loading mission...</p>
+            </div>
+        </div>
+
+        <!-- Grid -->
+        <div class="grid">
+            <!-- Tasks Card -->
+            <div class="card card-full">
+                <div class="card-header">
+                    <div class="card-title">
+                        <span class="card-icon">📋</span>
+                        Scheduled Tasks
+                    </div>
+                    <span class="badge" id="task-count">0 tasks</span>
+                </div>
+                <div class="card-body">
+                    <div class="task-list" id="task-list">
+                        <!-- Tasks loaded dynamically -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Agents Card -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <span class="card-icon">🤖</span>
+                        Meet the Team
+                    </div>
+                    <span class="badge" id="agent-count">0 agents</span>
+                </div>
+                <div class="card-body">
+                    <div class="agent-grid" id="agent-grid">
+                        <!-- Agents loaded dynamically -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Health Card -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <span class="card-icon">🩺</span>
+                        Health Tracking
+                    </div>
+                    <span class="badge">Daily</span>
+                </div>
+                <div class="card-body">
+                    <div class="health-goals" id="health-goals">
+                        <!-- Goals loaded dynamically -->
+                    </div>
+                    <div style="border-top: 1px solid var(--border); padding-top: 16px;">
+                        <p style="font-size: 12px; color: var(--text-secondary); margin-bottom: 12px;">今日提醒</p>
+                        <div class="reminder-list" id="reminder-list">
+                            <!-- Reminders loaded dynamically -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            Made with <span>🌙</span> by Luna for Enfield
+        </div>
+    </div>
+
+    <script>
+        // Load data from JSON files
+        async function loadData() {
+            try {
+                // In a real setup, these would be fetched from the server
+                // For now, we'll use the data embedded in the page
+                const tasksResponse = await fetch('./data/tasks.json');
+                const tasksData = await tasksResponse.json();
+                
+                const healthResponse = await fetch('./data/health.json');
+                const healthData = await healthResponse.json();
+                
+                const agentsResponse = await fetch('./data/agents.json');
+                const agentsData = await agentsResponse.json();
+                
+                renderTasks(tasksData);
+                renderHealth(healthData);
+                renderAgents(agentsData);
+                
+                document.getElementById('mission-text').textContent = tasksData.mission;
+                document.getElementById('last-updated').textContent = new Date(tasksData.lastUpdated).toLocaleString('zh-HK');
+            } catch (error) {
+                console.error('Error loading data:', error);
+                document.getElementById('task-list').innerHTML = '<p style="color: var(--text-secondary);">Loading data from JSON files...</p>';
+            }
+        }
+
+        function renderTasks(data) {
+            const taskList = document.getElementById('task-list');
+            document.getElementById('task-count').textContent = `${data.tasks.length} tasks`;
+            
+            taskList.innerHTML = data.tasks.map(task => `
+                <div class="task-item ${task.status}">
+                    <div class="task-status ${task.status}"></div>
+                    <div class="task-info">
+                        <div class="task-title">${task.title}</div>
+                        <div class="task-meta">${task.description} • ${task.schedule || 'Ad-hoc'}</div>
+                    </div>
+                    <span class="task-agent">${task.agent}</span>
+                </div>
+            `).join('');
+        }
+
+        function renderHealth(data) {
+            const goalsList = document.getElementById('health-goals');
+            const reminderList = document.getElementById('reminder-list');
+            
+            goalsList.innerHTML = data.healthGoals.map(goal => `
+                <div class="goal-item">
+                    <span class="goal-icon">🎯</span>
+                    <span>${goal}</span>
+                </div>
+            `).join('');
+            
+            reminderList.innerHTML = data.reminders.map(reminder => `
+                <div class="reminder-item">
+                    <span>${reminder.title}</span>
+                    <span class="reminder-time">${reminder.time}</span>
+                </div>
+            `).join('');
+        }
+
+        function renderAgents(data) {
+            const agentGrid = document.getElementById('agent-grid');
+            document.getElementById('agent-count').textContent = `${data.team.length} agents`;
+            
+            agentGrid.innerHTML = data.team.map(agent => `
+                <div class="agent-card ${agent.status}">
+                    <div class="agent-emoji">${agent.emoji}</div>
+                    <div class="agent-name">${agent.name}</div>
+                    <div class="agent-role">${agent.roleZh}</div>
+                    <span class="agent-status ${agent.status}">${agent.status === 'active' ? 'Active' : 'Standby'}</span>
+                </div>
+            `).join('');
+        }
+
+        // Load data when page loads
+        loadData();
+    </script>
+</body>
+</html>

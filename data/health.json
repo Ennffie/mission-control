@@ -1,0 +1,37 @@
+{
+  "version": "1.0.0",
+  "user": "Enfield",
+  "healthGoals": [
+    "控制高血壓",
+    "降低膽固醇",
+    "建立運動習慣"
+  ],
+  "records": [
+    {
+      "date": "2026-02-20",
+      "bloodPressure": {
+        "morning": null,
+        "evening": null
+      },
+      "weight": null,
+      "notes": "今日開始記錄",
+      "medications": []
+    }
+  ],
+  "reminders": [
+    {
+      "id": "health-001",
+      "title": "量血壓（朝早）",
+      "time": "08:00",
+      "status": "pending",
+      "type": "daily"
+    },
+    {
+      "id": "health-002",
+      "title": "量血壓（晚黑）",
+      "time": "21:00",
+      "status": "pending",
+      "type": "daily"
+    }
+  ]
+}
